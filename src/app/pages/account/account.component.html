@@ -24,111 +24,149 @@
 </ion-header>
 
 <!-- Contents -->
-<ion-content id="account" class="ion-padding">
+<!-- Contents -->
+<ion-content id="signup" fullscreen>
+  <div class="section_one">
+  </div>
 
-  <!-- User/Profile Infos -->
-  <ion-item lines="none">
-    <!-- Avatar/Image of User -->
-    <ion-avatar slot="end">
-      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-    </ion-avatar>
+  <!-- SignUp Form -->
+  <div class="section_two ion-padding">
+    <form [formGroup]="profileForm" class="ion-padding">
+      <!-- Personal Information -->
+      
+      <ion-item lines="none">
+        <ion-label position="stacked" style="font-size: 22px;"><ion-icon name="person" color="color2"></ion-icon> Datos de Perfil</ion-label>
+      </ion-item>
+      
+      <ion-list lines="full" class="ion-margin">
+        <ion-item >
+          <ion-label class="recize-label" position="stacked">
+            NIT
+          </ion-label>
+          <ion-input placeholder="" class="input-custom"  type="text" formControlName="firstName"></ion-input>
+        </ion-item>
 
-    <!-- Name of User -->
-    <ion-label>
-      <h2>Alessia McKenzie</h2>
-      <p>Silver Member</p>
-    </ion-label>
-  </ion-item>
+        <ion-item style="padding-top: 12px;">
+          <ion-label class="recize-label" position="stacked">
+            Establecimiento por defecto  
+          </ion-label>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="secondName"></ion-input>
+        </ion-item>
+        <ion-item style="padding-top: 12px;">
+          <ion-label class="recize-label" position="stacked">
+            Regimen ISR  
+          </ion-label>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="othersName"></ion-input>
+        </ion-item>
 
-  <!-- Some Menu Options -->
-  <ion-card>
-    <ion-grid>
-      <ion-row class="ion-text-center">
-        <ion-col>
-          <ion-icon name="heart" style="zoom:1.5;"></ion-icon><br />
-          <ion-text>Wish List</ion-text>
-        </ion-col>
-        <ion-col>
-          <ion-icon name="checkbox-outline" style="zoom:1.5;"></ion-icon><br />
-          Orders
-        </ion-col>
-        <ion-col>
-          <ion-icon name="cart" style="zoom:1.5;"></ion-icon><br />
-          Cart
-        </ion-col>
-        <ion-col>
-          <ion-icon name="gift" style="zoom:1.5;"></ion-icon><br />
-          Deals
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
+        <ion-item style="padding-top: 12px;">
+          <ion-label class="recize-label" position="stacked">
+            Regimen IVA  
+          </ion-label>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="lastName"></ion-input>
+        </ion-item>
 
-  <!-- Some Orders Option -->
-  <ion-card>
-    <ion-item-group>
-      <ion-item-divider>
-        <ion-label>Orders</ion-label>
-      </ion-item-divider>
+        <ion-item style="padding-top: 12px;">
+          <ion-label class="recize-label" position="stacked">
+            Direccion Fiscal  
+          </ion-label>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="secondLastName"></ion-input>
+        </ion-item>
 
-      <ion-item lines="none">
-        <ion-label>Unpaid</ion-label>
-        <ion-icon name="arrow-forward" size="small" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label>To be shipped</ion-label>
-        <ion-icon name="arrow-forward" size="small" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label>Shipped</ion-label>
-        <ion-icon name="arrow-forward" size="small" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label>To be reviewed</ion-label>
-        <ion-icon name="arrow-forward" size="small" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label>In dispute</ion-label>
-        <ion-icon name="arrow-forward" size="small" slot="end"></ion-icon>
-      </ion-item>
-    </ion-item-group>
-  </ion-card>
+        <ion-item style="padding-top: 12px;">
+          <ion-label class="recize-label" position="stacked">
+            Direccion Comercial  
+          </ion-label>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="lastName"></ion-input>
+        </ion-item>
 
-  <ion-card>
-    <ion-item-group>
-      <ion-item lines="none">
-        <ion-label>Wallet</ion-label>
-        <ion-icon name="arrow-forward" size="small" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label>Shipping Address</ion-label>
-        <ion-icon name="arrow-forward" size="small" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label>Redeem invite code</ion-label>
-        <ion-icon name="arrow-forward" size="small" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label>Questions & Answers</ion-label>
-        <ion-icon name="arrow-forward" size="small" slot="end"></ion-icon>
-      </ion-item>
-    </ion-item-group>
-  </ion-card>
+        <ion-item style="padding-top: 12px;">
+          <ion-label class="recize-label" position="stacked">
+            Primer Nombre  
+          </ion-label>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="lastName"></ion-input>
+        </ion-item>
 
-  <ion-card>
-    <ion-item-group>
+
+        <ion-item style="padding-top: 12px;">
+          <ion-label class="recize-label" position="stacked">
+            Segundo Nombre  
+          </ion-label>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="lastName"></ion-input>
+        </ion-item>
+
+        <ion-item style="padding-top: 12px;">
+          <ion-label class="recize-label" position="stacked">
+            Tercer Nombre  
+          </ion-label>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="lastName"></ion-input>
+        </ion-item>
+
+
+        <ion-item style="padding-top: 12px;">
+          <ion-label class="recize-label" position="stacked">
+            Primer Apellido  
+          </ion-label>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="lastName"></ion-input>
+        </ion-item>
+
+        <ion-item style="padding-top: 12px;">
+          <ion-label class="recize-label" position="stacked">
+            Segundo Apellido  
+          </ion-label>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="lastName"></ion-input>
+        </ion-item>
+
+        <ion-item style="padding-top: 12px;">
+          <ion-label class="recize-label" position="stacked">
+            Apellido de Casada  
+          </ion-label>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="lastName"></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+  <div class="section_three ion-padding">
+    <form [formGroup]="profileForm" class="ion-padding">
+      <!-- Personal Information -->
+      
       <ion-item lines="none">
-        <ion-label>Settings</ion-label>
-        <ion-icon name="arrow-forward" size="small" slot="end"></ion-icon>
+        <ion-label position="stacked" style="font-size: 22px;"><ion-icon name="person" color="color2"></ion-icon> Detalle de membresia</ion-label>
       </ion-item>
-      <ion-item lines="none">
-        <ion-label>App Suggestion</ion-label>
-        <ion-icon name="arrow-forward" size="small" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label>Help Center</ion-label>
-        <ion-icon name="arrow-forward" size="small" slot="end"></ion-icon>
-      </ion-item>
-    </ion-item-group>
-  </ion-card>
+      
+      <ion-list lines="full" class="ion-margin">
+        <ion-item >
+          <ion-label class="recize-label" position="stacked">
+            Membresia
+          </ion-label>
+          <ion-input placeholder="" class="input-custom"  type="text" formControlName="firstName"></ion-input>
+        </ion-item>
+
+        <ion-item style="padding-top: 12px;">
+          <ion-label class="recize-label" position="stacked">
+            Periodo de cobro  
+          </ion-label>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="secondName"></ion-input>
+        </ion-item>
+
+
+
+
+      </ion-list>
+      
+      
+      
+      
+      <!-- SignUp Button -->
+      <div class="buttons ion-padding-top">
+        <ion-button (click)="false" [disabled]="!profileForm.valid" expand="block" color="color1"  routerDirection="root">
+          <ion-text><strong>Guardar</strong></ion-text>
+        </ion-button>
+
+        <ion-button (click)="false"  expand="block" color="color1"  routerDirection="root">
+          <ion-text><strong>Cancelar</strong></ion-text>
+        </ion-button>
+      </div>
+    </form>
+  </div>
 </ion-content>

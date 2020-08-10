@@ -46,7 +46,7 @@ export class AppComponent {
 
   // Signout Button
   signout() {
-    this.router.navigate(['/onbroading']);
+    this.router.navigate(['/signin']);
     this.menuController.enable(false); // Make Sidemenu disable
   }
 }

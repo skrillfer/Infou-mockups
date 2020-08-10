@@ -14,7 +14,7 @@ export class PagesService {
         url: '/tabs/tab1',
         icon: 'home'
       },
-      {
+      /*{
         title: 'Shop',
         url: '/tabs/products',
         icon: 'basket'
@@ -43,7 +43,7 @@ export class PagesService {
         title: 'Orders',
         url: '/tabs/orders',
         icon: 'md-checkmark-circle-outline'
-      }
+      }*/
     ];
   }
 }

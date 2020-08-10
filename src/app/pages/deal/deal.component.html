@@ -62,6 +62,11 @@
           <input class="input-customer" placeholder="" style="display: inline-block;"  type="text" formControlName="firstName"/>
         </div>
       </div>
+      <div class="ion-margin-top" style="float:right">
+        <ion-label style="font-size: larger;">
+          <strong>Total</strong> Q10000
+        </ion-label>
+      </div>
     </div>
   </div>
   <div class="section_one">
@@ -94,17 +99,29 @@
               <td>Cobro de servicios</td>
               <td>2000</td>
               <td>2%</td>
-              <td></td>
+              <td>
+                <ion-icon slot="icon-only" name="add" class="custom-icon"></ion-icon>
+                <ion-icon slot="icon-only" name="close" class="custom-icon" style="background-color: red;"></ion-icon>
+              </td>
             </tr>
             <tr>
               <th scope="row">1</th>
               <td>Cobro de servicios</td>
               <td>2000</td>
               <td>2%</td>
-              <td></td>
+              <td>
+                <ion-icon slot="icon-only" name="add" class="custom-icon"></ion-icon>
+                <ion-icon slot="icon-only" name="close" class="custom-icon" style="background-color: red;"></ion-icon>
+              </td>
             </tr>
           </tbody>
         </table>
+        <ion-button color="primary">
+          Generar Factura
+        </ion-button>
+        <ion-button color="light">
+          Regresar
+        </ion-button>
       </div>
   
     </div>

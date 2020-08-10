@@ -1,5 +1,5 @@
 <!--
-  - Deal Screen
+  - Account Screen
   - @author    ThemesBuckets <themesbuckets@gmail.com>
   - @copyright Copyright (c) 2020
   - @license   AppsPlaces
@@ -9,7 +9,7 @@
 <ion-header no-border>
   <ion-toolbar color="color1">
 
-    <!-- Side menu option -->
+    <!-- Side Menu -->
     <ion-buttons slot="start">
       <ion-menu-toggle menu="pages">
         <ion-button color="white">
@@ -19,37 +19,98 @@
     </ion-buttons>
 
     <!-- Page title -->
-    <ion-title>Deals</ion-title>
-
-    <!-- Cart Button Option -->
-    <ion-buttons slot="end">
-      <ion-button color="white" (click)="gotoCartPage()">
-        <ion-icon name="cart"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-title>Facturar</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <!-- Contents -->
-<ion-content id="deal">
-  <ion-card *ngFor="let item of deals">
+<!-- Contents -->
 
-    <!-- Any deal content image -->
-    <img [src]="item.image" />
+<ion-content id="signup" fullscreen>
+  
+  <div class="section_one ion-padding" [formGroup]="profileForm">
+    <div class="container">
+      <div>
+        <div style="display: inline-block;">
+          <ion-label class="label-custom" position="stacked">
+            Establecimiento
+          </ion-label>
+        </div>
+        <div style="display: inline-block;">
+          <input class="input-customer" placeholder="" style="display: inline-block;"  type="text" formControlName="firstName"/>
+        </div>
+      </div>
 
-    <!-- Wish Button or Product Like/Dislike Button Option -->
-    <ion-fab vertical="top" horizontal="end">
-      <ion-fab-button>
-        <ion-icon color="color1" name="heart"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+      <div class="ion-margin-top">
+        <div style="display: inline-block;">
+          <ion-label class="label-custom" position="stacked">
+            Fecha
+          </ion-label>
+        </div>
+        <div style="display: inline-block;">
+          <input class="input-customer" placeholder="" style="display: inline-block;"  type="date" formControlName="firstName"/>
+        </div>
+      </div>
 
-    <!-- Deal contents -->
-    <ion-card-header>
-      <ion-card-title class="ion-padding-bottom">{{item.title}}</ion-card-title>
-      <ion-card-subtitle class="ion-text-wrap">{{item.subTitle}}</ion-card-subtitle>
-      <ion-button color="color1" size="small">Shop Now</ion-button>
-    </ion-card-header>
-  </ion-card>
+      <div class="ion-margin-top">
+        <div style="display: inline-block;">
+          <ion-label class="label-custom" position="stacked">
+            Nit
+          </ion-label>
+        </div>
+        <div style="display: inline-block;">
+          <input class="input-customer" placeholder="" style="display: inline-block;"  type="text" formControlName="firstName"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section_one">
+    <div class="container">
+      <div class="table-responsive">    
+        <table class="table table-striped" style="overflow-x: scroll;">
+          <thead>
+            <tr>
+              <th scope="col">Cant.</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Des.</th>
+              <th scope="col">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Cobro de servicios</td>
+              <td>2000</td>
+              <td>2%</td>
+              <td>
+                <ion-icon slot="icon-only" name="add" class="custom-icon"></ion-icon>
+                <ion-icon slot="icon-only" name="close" class="custom-icon" style="background-color: red;"></ion-icon>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Cobro de servicios</td>
+              <td>2000</td>
+              <td>2%</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Cobro de servicios</td>
+              <td>2000</td>
+              <td>2%</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+  
+  </div>
+
+  <!-- SignUp Form -->
+  
 </ion-content>

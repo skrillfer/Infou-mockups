@@ -9,3 +9,53 @@
         font-size: 1.2rem;
     }
 }
+
+.label-custom{
+    font-weight: bold;
+}
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.input-customer{
+    
+    color: rgb(102, 100, 100);
+    margin-left: 18px;
+    border: none;
+    border-bottom: 1px solid black;
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color:    #909;
+    }
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+       color:    #909;
+       opacity:  1;
+    }
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+       color:    #909;
+       opacity:  1;
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+       color:    #909;
+    }
+    &::-ms-input-placeholder { /* Microsoft Edge */
+       color:    #909;
+    }
+    
+    &::placeholder { /* Most modern browsers support this now. */
+       color:    #909;
+    }
+}
+
+.custom-icon{
+    background-color: blue;
+    color: white;
+    margin: 2px;
+    font-size: larger;
+    &:active{
+        background-color: cadetblue;
+    }
+}

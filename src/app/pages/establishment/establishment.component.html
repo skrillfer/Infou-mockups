@@ -1,0 +1,77 @@
+<!--
+  - Account Screen
+  - @author    ThemesBuckets <themesbuckets@gmail.com>
+  - @copyright Copyright (c) 2020
+  - @license   AppsPlaces
+-->
+
+<!-- Header -->
+<ion-header no-border>
+    <ion-toolbar color="color1">
+  
+      <!-- Side Menu -->
+      <ion-buttons slot="start">
+        <ion-menu-toggle menu="pages">
+          <ion-button color="white">
+            <ion-icon name="md-list" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-menu-toggle>
+      </ion-buttons>
+  
+      <!-- Page title -->
+      <ion-title>Establecimientos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <!-- Contents -->
+  <!-- Contents -->
+  
+  <ion-content id="signup" fullscreen>
+    
+    <div class="section_one ion-padding">
+      <div class="container">
+        
+  
+        <div class="ion-margin-top">
+          <div class="col-md-2" style="float: right; font-size: x-large">
+            <ion-icon (click)="goToCreateNewEstablishment()" slot="icon-only" name="add" class="custom-icon"></ion-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section_one">
+      <div class="container">
+        <div class="table-responsive">    
+          <table class="table table-striped" style="overflow-x: scroll;">
+            <thead>
+              <tr>
+                <th scope="col">Nit</th>
+                <th scope="col">Nombre</th>    
+                <th scope="col">
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let establishment of allEstablishments">
+                <td>{{establishment.nit}}</td>
+                <td>{{establishment.name}}</td>
+                <td>
+                  <ion-icon (click)="goToEditEstablishment(establishment._id)" slot="icon-only" name="settings" class="custom-icon-engine" ></ion-icon>
+                  <ion-icon (click)="deleteSubmitEstablishment(establishment._id)" slot="icon-only" name="remove" class="custom-icon text-danger-custom"></ion-icon>
+                </td>
+              </tr>
+              <tr *ngIf="allEstablishments.length===0 && loading===false">
+                <td colspan="3">Sin establecimientos disponibles.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    
+      </div>
+    
+    </div>
+  
+    <!-- SignUp Form -->
+    
+  </ion-content>
+  

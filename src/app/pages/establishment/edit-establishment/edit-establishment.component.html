@@ -1,0 +1,68 @@
+<!-- Header -->
+<ion-header no-border>
+    <ion-toolbar color="color1">
+  
+      <!-- Close modal page -->
+      <ion-buttons slot="end">
+        <ion-button (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  
+      <!-- Title -->
+      <ion-title> Editar establecimiento </ion-title>
+  
+    </ion-toolbar>
+  </ion-header>
+  
+  <!-- Main Contents of Page -->
+  <ion-content id="product-details" fullscreen class="ion-padding">
+      <form [formGroup]="profileForm" style="width: 100%;">
+        <ion-row class="ion-text-center">
+
+          <!-- name -->
+          <ion-item  class="ion-no-padding" style="width: 100%;">
+            <ion-row>
+              <ion-col size="auto">
+                <ion-label [class]="'ion-text-wrap recize-label required'" position="stacked">
+                  Nombre
+                </ion-label>
+                <ion-input 
+                  placeholder="" 
+                  class="input-custom" 
+                  style="display: block; margin-top: 8px;"  
+                  type="text" 
+                  formControlName="name"></ion-input>  
+                <span style="font-size: 12px; color:red"></span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <!-- nit -->
+          <ion-item  class="ion-no-padding" style="width: 100%;">
+            <ion-row>
+              <ion-col size="auto">
+                <ion-label [class]="'ion-text-wrap recize-label required'" position="stacked">
+                  NIT
+                </ion-label>
+                <ion-input 
+                  placeholder="" 
+                  class="input-custom" 
+                  style="display: block; margin-top: 8px;"  
+                  type="text" 
+                  formControlName="nit"></ion-input>  
+                <span style="font-size: 12px; color:red"></span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          
+        </ion-row>
+
+      </form>
+
+    
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <ion-button (click)="editEstablishmentSubmit()" color="primary" >Editar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-content>

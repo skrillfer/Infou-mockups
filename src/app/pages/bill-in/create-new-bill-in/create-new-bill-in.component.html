@@ -1,0 +1,175 @@
+<!-- Header -->
+<ion-header no-border>
+    <ion-toolbar color="color1">
+  
+      <!-- Close modal page -->
+      <ion-buttons slot="end">
+        <ion-button (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  
+      <!-- Title -->
+      <ion-title> Ingresar nueva factura </ion-title>
+  
+    </ion-toolbar>
+  </ion-header>
+  
+  <!-- Main Contents of Page -->
+  <ion-content id="product-details" fullscreen class="ion-padding">
+      <form [formGroup]="profileForm" style="width: 100%;">
+        <ion-row class="ion-text-center">
+
+          <!-- noAuthorization -->
+          <ion-item  class="ion-no-padding" style="width: 100%;">
+            <ion-row>
+              <ion-col size="auto">
+                <ion-label class="ion-text-wrap recize-label required" position="stacked">
+                  Numero de autorizacion
+                </ion-label>
+                <ion-input 
+                  placeholder="" 
+                  class="input-custom" 
+                  style="display: block; margin-top: 8px;"  
+                  type="text" 
+                  formControlName="noAuthorization"></ion-input>  
+                <span style="font-size: 12px; color:red"></span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <!-- date -->
+          <ion-item  class="ion-no-padding" style="width: 100%;">
+            <ion-row>
+              <ion-col size="auto">
+                <ion-label [class]="'ion-text-wrap recize-label required'" position="stacked">
+                  Fecha
+                </ion-label>
+                <ion-input 
+                  placeholder="" 
+                  class="input-custom" 
+                  style="display: block; margin-top: 8px;"  
+                  type="date" 
+                  formControlName="date"></ion-input>  
+                <span style="font-size: 12px; color:red"></span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <!-- name -->
+          <ion-item  class="ion-no-padding" style="width: 100%;">
+            <ion-row>
+              <ion-col size="auto">
+                <ion-label [class]="'ion-text-wrap recize-label required'" position="stacked">
+                  Nombre
+                </ion-label>
+                <ion-input 
+                  placeholder="" 
+                  class="input-custom" 
+                  style="display: block; margin-top: 8px;"  
+                  type="text" 
+                  formControlName="name"></ion-input>  
+                <span style="font-size: 12px; color:red"></span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <!-- nit -->
+          <ion-item  class="ion-no-padding" style="width: 100%;">
+            <ion-row>
+              <ion-col size="auto">
+                <ion-label [class]="'ion-text-wrap recize-label required'" position="stacked">
+                  NIT
+                </ion-label>
+                <ion-input 
+                  placeholder="" 
+                  class="input-custom" 
+                  style="display: block; margin-top: 8px;"  
+                  type="text" 
+                  formControlName="nit"></ion-input>  
+                <span style="font-size: 12px; color:red"></span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <!-- serie sat -->
+          <ion-item  class="ion-no-padding" style="width: 100%;">
+            <ion-row>
+              <ion-col size="auto">
+                <ion-label [class]="'ion-text-wrap recize-label required'" position="stacked">
+                  Series
+                </ion-label>
+                <ion-input 
+                  placeholder="" 
+                  class="input-custom" 
+                  style="display: block; margin-top: 8px;"  
+                  type="text" 
+                  formControlName="serieSAT"></ion-input>  
+                <span style="font-size: 12px; color:red"></span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <!-- noSAT -->
+          <ion-item  class="ion-no-padding" style="width: 100%;">
+            <ion-row>
+              <ion-col size="auto">
+                <ion-label [class]="'ion-text-wrap recize-label required'" position="stacked">
+                  Numero
+                </ion-label>
+                <ion-input 
+                  placeholder="" 
+                  class="input-custom" 
+                  style="display: block; margin-top: 8px;"  
+                  type="text" 
+                  formControlName="noSAT"></ion-input>  
+                <span style="font-size: 12px; color:red"></span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <!-- value -->
+          <ion-item  class="ion-no-padding" style="width: 100%;">
+            <ion-row>
+              <ion-col size="auto">
+                <ion-label [class]="'ion-text-wrap recize-label required'" position="stacked">
+                  Valor
+                </ion-label>
+                <ion-input 
+                  placeholder="" 
+                  class="input-custom" 
+                  style="display: block; margin-top: 8px;"  
+                  type="number" 
+                  formControlName="value"></ion-input>  
+                <span style="font-size: 12px; color:red"></span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <!-- type -->
+          <ion-item  class="ion-no-padding" lines="none" >
+            <ion-row>
+              <ion-col>
+                <ion-label [class]="'ion-text-wrap recize-label required'" position="stacked">
+                  Tipo</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item  class="ion-no-padding" style="width: 100%;">
+            <ion-row style="width: 100%;">
+              <ion-col size-xl="4">
+                <ion-label></ion-label>
+                <ion-select class="input-custom" style="display: flex; overflow-x: scroll;" formControlName="type" okText="OK" cancelText="Cancelar" placeholder="Seleccione uno" 
+                >
+                  <ion-select-option value="Bien" >
+                    <p>Bien</p>
+                  </ion-select-option>
+                  <ion-select-option value="Servicio" >
+                    <p>Servicio</p>
+                  </ion-select-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-row>
+
+      </form>
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <ion-button (click)="createBillSubmit()" color="primary" >Agregar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-content>

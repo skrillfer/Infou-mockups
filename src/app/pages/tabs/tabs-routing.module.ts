@@ -24,7 +24,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../deal/deal.module').then(m => m.DealModule)
+              import('../establishment/establishment.module').then(m => m.EstablishmentModule)
           }
         ]
       },
@@ -34,7 +34,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../wishlist/wishlist.module').then(m => m.WishlistModule)
+              import('../bill-in/bill-in.module').then(m => m.BillInModule)
           }
         ]
       },

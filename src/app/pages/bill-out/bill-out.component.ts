@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, LoadingController } from '@ionic/angular';
-import { CreateNewBillInComponent } from './create-new-bill-in/create-new-bill-in.component';
-import { BillIn, BackendResponse } from 'src/app/services/interface.services';
+import { CreateNewBillOutComponent } from './create-new-bill-out/create-new-bill-out.component';
+import { BillIn, BackendResponse, BillOut } from 'src/app/services/interface.services';
 import { DataService } from 'src/app/services/data.service';
-import { EditBillInComponent } from './edit-bill-in/edit-bill-in.component';
+import { EditBillOutComponent } from './edit-bill-out/edit-bill-out.component';
 
 @Component({
-  selector: 'app-bill-in',
-  templateUrl: './bill-in.component.html',
-  styleUrls: ['./bill-in.component.scss']
+  selector: 'app-bill-out',
+  templateUrl: './bill-out.component.html',
+  styleUrls: ['./bill-out.component.scss']
 })
-export class BillInComponent implements OnInit {
-  allBillIn: BillIn[] = [];
+export class BillOutComponent implements OnInit {
+  allBillOut: BillOut[] = [];
   loading = true;
   constructor(public modalController: ModalController,
     private loadingController: LoadingController,
     private dat: DataService) {
-      this.dat.getAllBillsIn().subscribe((resp:BackendResponse)=>{
+      this.dat.getAllBillsOut().subscribe((resp:BackendResponse)=>{
         if(resp.status){
-          this.allBillIn = resp.data;
+          this.allBillOut = resp.data;
         }
         this.loading = false;
       });
@@ -29,19 +29,19 @@ export class BillInComponent implements OnInit {
   }
 
   receivedCreated(event:BillIn){
-    this.allBillIn.push(event);
+    this.allBillOut.push(event);
   }
 
   receivedEdited(event:BillIn){
-    var index = this.allBillIn.findIndex(o => o._id===event._id);
+    var index = this.allBillOut.findIndex(o => o._id===event._id);
     if (index !== -1) {
-        this.allBillIn[index] = event;
+        this.allBillOut[index] = event;
     }
   }
 
   async goToCreateNewBillIn() {
     const modal = await this.modalController.create({
-      component: CreateNewBillInComponent,
+      component: CreateNewBillOutComponent,
       componentProps: { 
         "emitNewBill" : (event)=> this.receivedCreated(event)
       }
@@ -51,7 +51,7 @@ export class BillInComponent implements OnInit {
 
   async goToEditBillIn(_id:string){
     const modal = await this.modalController.create({
-      component: EditBillInComponent,
+      component: EditBillOutComponent,
       componentProps: { 
         "emitEdittedBill" : (event) => this.receivedEdited(event),
         "_id": _id
@@ -65,9 +65,9 @@ export class BillInComponent implements OnInit {
       {
         text: 'Si, eliminalo.',
         handler: () => {
-          this.dat.deteleSpecificBillIn(_id).subscribe((resp:BackendResponse) => {
+          this.dat.deteleSpecificBillOut(_id).subscribe((resp:BackendResponse) => {
             if(resp.status){
-              this.allBillIn = this.allBillIn.filter(o=> o._id!==_id);
+              this.allBillOut = this.allBillOut.filter(o=> o._id!==_id);
               this.dat.presentAlertConfirm(["Entendido"],"Mensaje","Eliminado correctamente.");
             }else{
               this.dat.presentAlertConfirm(["Entendido"],"Error",resp.message);
@@ -85,6 +85,4 @@ export class BillInComponent implements OnInit {
   getFormatDate(date:string){
     return new Date(date).toISOString().substring(0, 10);
   }
-
-  
 }

@@ -22,6 +22,9 @@ import { EditBillInComponent } from './pages/bill-in/edit-bill-in/edit-bill-in.c
 import { EstablishmentModule } from './pages/establishment/establishment.module';
 import { CreateNewEstablishmentComponent } from './pages/establishment/create-new-establishment/create-new-establishment.component';
 import { EditEstablishmentComponent } from './pages/establishment/edit-establishment/edit-establishment.component';
+import { BillOutModule } from './pages/bill-out/bill-out.module';
+import { CreateNewBillOutComponent } from './pages/bill-out/create-new-bill-out/create-new-bill-out.component';
+import { EditBillOutComponent } from './pages/bill-out/edit-bill-out/edit-bill-out.component';
 
 
 @NgModule({
@@ -33,11 +36,13 @@ import { EditEstablishmentComponent } from './pages/establishment/edit-establish
     CartComponent,
     CheckoutComponent,
     CreateNewBillInComponent,
+    CreateNewBillOutComponent,
     EditBillInComponent,
+    EditBillOutComponent,
     CreateNewEstablishmentComponent,
     EditEstablishmentComponent],
   imports: [BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule,
-    BrowserAnimationsModule, IonicStorageModule.forRoot(), BillInModule, EstablishmentModule],
+    BrowserAnimationsModule, IonicStorageModule.forRoot(), BillInModule, EstablishmentModule, BillOutModule],
   providers: [
     DataService,
     StatusBar,

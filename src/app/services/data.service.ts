@@ -6,7 +6,7 @@ import { AlertController } from '@ionic/angular';
 
 import { forkJoin, Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
-import { SignInContainer,User, BillIn, Establishment } from './interface.services';
+import { SignInContainer,User, BillIn, Establishment, BillOut } from './interface.services';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,8 @@ export class DataService {
   private apiRegister:any=`${this.host}/users/register`;
   // BILL IN
   private apiBillIn:any = `${this.host}/bill-in`
+  // BILL OUT
+  private apiBillOut:any = `${this.host}/bill-out`
   
   // ESTABLISHMENT
   private apiEstablishment:any = `${this.host}/establishment`
@@ -88,20 +90,24 @@ export class DataService {
 
   // Bill-out
   
-  createBillOut(){
-
+  createBillOut(body: BillOut){
+    return this.http.post(`${this.apiBillOut}`,body).pipe(data => data);
   }
 
-  updateSpecificBillOut(){
-    
+  updateSpecificBillOut(id,body){
+    return this.http.put(`${this.apiBillOut}/${id}`,body).pipe(data => data);
   }
   
-  deteleSpecificBillOut(){
-
+  deteleSpecificBillOut(id){
+    return this.http.delete(`${this.apiBillOut}/${id}`).pipe(data => data);
   }
 
   getAllBillsOut(){
+    return this.http.get(`${this.apiBillOut}`).pipe(data => data);
+  }
 
+  getOneBillOut(id){
+    return this.http.get(`${this.apiBillOut}/${id}`).pipe(data => data);
   }
 
   async presentAlertConfirm(buttons: any[],header:string,message:string) {

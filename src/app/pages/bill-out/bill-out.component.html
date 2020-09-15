@@ -19,7 +19,7 @@
       </ion-buttons>
   
       <!-- Page title -->
-      <ion-title>Ingreso Factura</ion-title>
+      <ion-title>Egreso Factura</ion-title>
     </ion-toolbar>
   </ion-header>
   
@@ -82,7 +82,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let bill of allBillIn">
+              <tr *ngFor="let bill of allBillOut">
                 <th scope="row">{{getFormatDate(bill.date)}}</th>
                 <td>{{bill.nit}}</td>
                 <td>{{bill.name}}</td>
@@ -93,7 +93,7 @@
                   <ion-icon (click)="deleteSubmit(bill._id)" slot="icon-only" name="remove" class="custom-icon text-danger-custom"></ion-icon>
                 </td>
               </tr>
-              <tr *ngIf="allBillIn.length===0 && loading===false">
+              <tr *ngIf="allBillOut.length===0 && loading===false">
                 <td colspan="6">Sin facturas disponibles.</td>
               </tr>
             </tbody>

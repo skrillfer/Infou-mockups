@@ -66,7 +66,15 @@ export interface Establishment{
 };
 
 export interface BillOut{
-
+    _id?:String;
+    noAuthorization: string;
+    date: Date;
+    name: string;
+    nit: string;
+    serieSAT: string;
+    noSAT: string;
+    value:number;
+    type:string;
 }
 
 export interface BackendResponse{

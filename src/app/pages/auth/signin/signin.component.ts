@@ -28,7 +28,9 @@ export class SigninComponent implements OnInit {
         }else{
           this.dat.presentAlertConfirm(['Entendido'],'Error',resp.message);
         }
-      },(err)=>{}); 
+      },(err)=>{
+        this.dat.presentAlertConfirm(['Entendido'],'Error',err.message)
+      }); 
     }else{
       this.dat.presentAlertConfirm(['Entendido'],'Faltan datos','Por favor complete todos los campos requeridos.')
     }

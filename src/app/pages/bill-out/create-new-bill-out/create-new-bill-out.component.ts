@@ -5,11 +5,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BackendResponse } from 'src/app/services/interface.services';
 
 @Component({
-  selector: 'app-create-new-bill-in',
-  templateUrl: './create-new-bill-in.component.html',
-  styleUrls: ['./create-new-bill-in.component.scss']
+  selector: 'app-create-new-bill-out',
+  templateUrl: './create-new-bill-out.component.html',
+  styleUrls: ['./create-new-bill-out.component.scss']
 })
-export class CreateNewBillInComponent implements OnInit {
+export class CreateNewBillOutComponent implements OnInit {
   @Input() emitNewBill;
   profileForm = new FormGroup({
     noAuthorization: new FormControl('',[Validators.required]),
@@ -39,7 +39,7 @@ export class CreateNewBillInComponent implements OnInit {
   createBillSubmit(){
     if(this.profileForm.valid){
       const {noAuthorization,date, name, nit,noSAT,serieSAT,type,value} = this.profileForm.value;
-      this.dat.createBillIn({
+      this.dat.createBillOut({
         noAuthorization,date,name,nit,
         noSAT,serieSAT,type,value
       }).subscribe((resp:BackendResponse) => {
@@ -54,6 +54,6 @@ export class CreateNewBillInComponent implements OnInit {
     }else{
       this.dat.presentAlertConfirm(['Entendido'],'Faltan datos','Por favor complete todos los campos requeridos.')
     }
-    
   }
+
 }

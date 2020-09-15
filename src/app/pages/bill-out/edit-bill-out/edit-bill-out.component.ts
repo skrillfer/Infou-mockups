@@ -1,21 +1,21 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { ModalController, Platform, LoadingController } from '@ionic/angular';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BackendResponse, BillIn } from 'src/app/services/interface.services';
 
 @Component({
-  selector: 'app-edit-bill-in',
-  templateUrl: './edit-bill-in.component.html',
-  styleUrls: ['./edit-bill-in.component.scss']
+  selector: 'app-edit-bill-out',
+  templateUrl: './edit-bill-out.component.html',
+  styleUrls: ['./edit-bill-out.component.scss']
 })
-export class EditBillInComponent implements OnInit {
+export class EditBillOutComponent implements OnInit {
   @Input() emitEdittedBill;
   @Input() _id:string;
   profileForm : FormGroup;
   loading =true;
-  constructor(
-    private modalController: ModalController,
+  
+  constructor(private modalController: ModalController,
     private dat: DataService,
     private loadingController: LoadingController) {
       this.profileForm = new FormGroup({
@@ -28,7 +28,7 @@ export class EditBillInComponent implements OnInit {
         value : new FormControl('',[Validators.required]),
         type : new FormControl('',[Validators.required]),
       });
-  }
+    }
 
   ngOnInit() {
     this.loadingController.create({
@@ -36,7 +36,7 @@ export class EditBillInComponent implements OnInit {
       backdropDismiss: true
     }).then((res) => {
       res.present();
-      this.dat.getOneBillIn(this._id).subscribe((resp:BackendResponse)=>{
+      this.dat.getOneBillOut(this._id).subscribe((resp:BackendResponse)=>{
         if(resp.status){
           const { noAuthorization,date,name,nit,serieSAT,noSAT,value,type } = resp.data as BillIn;
           this.profileForm.patchValue({
@@ -48,7 +48,6 @@ export class EditBillInComponent implements OnInit {
       },()=>{this.loading = false;this.hideLoader();});
     });
   }
-
   editBillSubmit(){
 
     if(this.profileForm.valid){
@@ -59,7 +58,7 @@ export class EditBillInComponent implements OnInit {
       }).then((res) => {
         res.present();
         const {noAuthorization,date,name,nit,serieSAT,noSAT,value,type} = this.profileForm.value;
-        this.dat.updateSpecificBillIn(this._id,{noAuthorization,date,name,nit,serieSAT,noSAT,value,type}).subscribe((resp:BackendResponse)=>{
+        this.dat.updateSpecificBillOut(this._id,{noAuthorization,date,name,nit,serieSAT,noSAT,value,type}).subscribe((resp:BackendResponse)=>{
           this.hideLoader();
 
           if(resp.status){
@@ -77,8 +76,6 @@ export class EditBillInComponent implements OnInit {
     }else{
       this.dat.presentAlertConfirm(['Entendido'],'Faltan datos','Por favor complete todos los campos requeridos.');
     }
-    
-  
   }
 
   hideLoader() {
@@ -94,4 +91,5 @@ export class EditBillInComponent implements OnInit {
       'dismissed': true
     })
   }
+
 }

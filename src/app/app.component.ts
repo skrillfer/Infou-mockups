@@ -7,6 +7,7 @@
  */
 
 import { Component } from '@angular/core';
+import { Plugins, Capacitor, App} from '@capacitor/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -14,6 +15,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { PagesService } from './services/pages.service';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -29,18 +31,31 @@ export class AppComponent {
     private statusBar: StatusBar,
     private menuController: MenuController,
     private router: Router,
-    private pagesService: PagesService
+    private pagesService: PagesService,
+    private auth: AuthenticationService
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-
+    this.platform.ready().then( async () => {
+      if(Capacitor.isPluginAvailable('SplashScreen')){
+        Plugins.SplashScreen.hide();
+      }
+      
       // Get Menus For Side Menu
       this.appPages = this.pagesService.getPages();
+
+      const user = await this.auth.isAuthenticated();
+      
+      if (user) {
+        this.router.navigate(['/tabs/tab1']);
+        this.auth.authState.next(true);
+      }else{
+        this.router.navigate(['/signin']);
+        this.auth.authState.next(false);
+      }
+
     });
   }
 

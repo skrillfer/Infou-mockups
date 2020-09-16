@@ -17,7 +17,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { BillInModule } from './pages/bill-in/bill-in.module';
 import { CreateNewBillInComponent } from './pages/bill-in/create-new-bill-in/create-new-bill-in.component';
 import { DataService } from './services/data.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EditBillInComponent } from './pages/bill-in/edit-bill-in/edit-bill-in.component';
 import { EstablishmentModule } from './pages/establishment/establishment.module';
 import { CreateNewEstablishmentComponent } from './pages/establishment/create-new-establishment/create-new-establishment.component';
@@ -25,6 +25,10 @@ import { EditEstablishmentComponent } from './pages/establishment/edit-establish
 import { BillOutModule } from './pages/bill-out/bill-out.module';
 import { CreateNewBillOutComponent } from './pages/bill-out/create-new-bill-out/create-new-bill-out.component';
 import { EditBillOutComponent } from './pages/bill-out/edit-bill-out/edit-bill-out.component';
+import { LoginGuardService } from './services/login.guard.service';
+import { AuthenticationService } from './services/authentication.service';
+import { AuthGuardService } from './services/auth.guard.service';
+import { AuthInterceptorService } from './services/auth.interceptor.service';
 
 
 @NgModule({
@@ -45,9 +49,17 @@ import { EditBillOutComponent } from './pages/bill-out/edit-bill-out/edit-bill-o
     BrowserAnimationsModule, IonicStorageModule.forRoot(), BillInModule, EstablishmentModule, BillOutModule],
   providers: [
     DataService,
+    LoginGuardService,
+    AuthenticationService,
+    AuthGuardService,
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

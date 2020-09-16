@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { BackendResponse } from 'src/app/services/interface.services';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-signin',
@@ -15,7 +16,9 @@ export class SigninComponent implements OnInit {
     password : new FormControl('',[Validators.required]),
   });
 
-  constructor(private dat: DataService, private router: Router) { }
+  constructor(private dat: DataService,
+    private router: Router,
+    private auth: AuthenticationService) { }
 
   ngOnInit() {}
 
@@ -24,6 +27,7 @@ export class SigninComponent implements OnInit {
       const {email, password} = this.profileForm.value;
       this.dat.userSignIn({email,password,loginType:""}).subscribe((resp:BackendResponse) => {
         if(resp.status){
+          this.auth.login(resp.data);
           this.router.navigateByUrl("/tabs/tab3");
         }else{
           this.dat.presentAlertConfirm(['Entendido'],'Error',resp.message);

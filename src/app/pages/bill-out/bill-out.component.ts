@@ -4,6 +4,11 @@ import { CreateNewBillOutComponent } from './create-new-bill-out/create-new-bill
 import { BillIn, BackendResponse, BillOut } from 'src/app/services/interface.services';
 import { DataService } from 'src/app/services/data.service';
 import { EditBillOutComponent } from './edit-bill-out/edit-bill-out.component';
+import { FormControl, FormGroup } from '@angular/forms';
+import { getCurrentMonthLastDay, getCurrentMonthFirstDay,getMonthName } from 'src/app/utils/utils';
+import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
+const { Filesystem } = Plugins;
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-bill-out',
@@ -13,14 +18,64 @@ import { EditBillOutComponent } from './edit-bill-out/edit-bill-out.component';
 export class BillOutComponent implements OnInit {
   allBillOut: BillOut[] = [];
   loading = true;
+  profileForm: FormGroup;
+
   constructor(public modalController: ModalController,
     private loadingController: LoadingController,
-    private dat: DataService) {
-      this.dat.getAllBillsOut().subscribe((resp:BackendResponse)=>{
+    private dat: DataService,private storage: Storage) {
+      const date = new Date();
+
+      this.profileForm = new FormGroup({
+        year: new FormControl(date.getFullYear()+''),
+        month: new FormControl(date.getMonth()+'')       
+      });
+      this.dat.getByFilterBillOut({
+        date: {
+          $gte: getCurrentMonthFirstDay(new Date()),
+          $lt: getCurrentMonthLastDay(new Date())
+        }
+      }).subscribe((resp:BackendResponse)=>{
         if(resp.status){
           this.allBillOut = resp.data;
         }
         this.loading = false;
+      });
+
+      this.profileForm.controls['year'].valueChanges.subscribe(val => {
+        if(val){
+          let createDate = new Date();
+          createDate = new Date(Number(val),Number(this.profileForm.value['month']),1);
+          this.dat.getByFilterBillOut({
+            date: {
+              $gte: getCurrentMonthFirstDay(createDate),
+              $lt: getCurrentMonthLastDay(createDate)
+            }
+          }).subscribe((resp:BackendResponse)=>{
+            if(resp.status){
+              this.allBillOut = resp.data;
+            }
+            this.loading = false;
+          });
+        }
+      });
+      this.profileForm.controls['month'].valueChanges.subscribe(val => {
+        if(val){
+          if(val){
+            let createDate = new Date();
+            createDate = new Date(Number(this.profileForm.value['year']),Number(val),1);
+            this.dat.getByFilterBillOut({
+              date: {
+                $gte: getCurrentMonthFirstDay(createDate),
+                $lt: getCurrentMonthLastDay(createDate)
+              }
+            }).subscribe((resp:BackendResponse)=>{
+              if(resp.status){
+                this.allBillOut = resp.data;
+              }
+              this.loading = false;
+            });
+          }
+        }
       });
   }
   
@@ -28,6 +83,47 @@ export class BillOutComponent implements OnInit {
 
   }
 
+  async billOutGenerateReport(){
+
+    const user = await this.storage.get('USER_INFO');
+    const fileName = `reporte_${getMonthName(new Date(Number(this.profileForm.value['year']),Number(this.profileForm.value['month']),1))}`
+    this.dat.billOutGenerateReport({name:fileName,bills:this.allBillOut,user},{responseType:'blob'}).subscribe((resp:any)=>{
+      const blob:any = new Blob([resp], {type: "application/pdf"});
+      //console.log(blob);
+      try {
+        var reader = new FileReader();
+        reader.readAsDataURL(blob); 
+        reader.onloadend = async () =>{
+          var base64data:any = reader.result;  
+          //console.log(base64data);              
+          await Filesystem.writeFile({
+            path: fileName,
+            data: base64data,
+            directory: FilesystemDirectory.Documents,
+            // encoding: FilesystemEncoding.UTF8
+          });
+          const header = 'Aviso!';
+          const buttons = [
+            {
+              text: 'Entendido',
+              handler: () => {}
+            }
+          ];
+          this.dat.presentAlertConfirm(buttons,header,`Se ha descargado ${fileName} en Documentos`);
+        }
+         
+      } catch (error) {
+        const header = 'Error!';
+        const buttons = [
+          {
+            text: 'Entendido',
+            handler: () => {}
+          }
+        ];
+        this.dat.presentAlertConfirm(buttons,header,error.message);
+      }
+    });
+  }
   receivedCreated(event:BillIn){
     this.allBillOut.push(event);
   }

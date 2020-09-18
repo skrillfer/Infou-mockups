@@ -88,6 +88,10 @@ export class DataService {
     return this.http.get(`${this.apiBillIn}/${id}`).pipe(data => data);
   }
 
+  getByFilterBillIn(condition){
+    return this.http.post(`${this.apiBillIn}/filter`,condition).pipe(data => data);
+  }
+
   // Bill-out
   
   createBillOut(body: BillOut){
@@ -106,8 +110,16 @@ export class DataService {
     return this.http.get(`${this.apiBillOut}`).pipe(data => data);
   }
 
+  billOutGenerateReport(body,responseType){
+    return this.http.post(`${this.apiBillOut}/generate_report`,body,responseType).pipe(data => data);
+  }
+
   getOneBillOut(id){
     return this.http.get(`${this.apiBillOut}/${id}`).pipe(data => data);
+  }
+
+  getByFilterBillOut(condition){
+    return this.http.post(`${this.apiBillOut}/filter`,condition).pipe(data => data);
   }
 
   async presentAlertConfirm(buttons: any[],header:string,message:string) {

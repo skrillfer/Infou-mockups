@@ -40,6 +40,13 @@
             background-color: rgb(243, 115, 115);
         }
     }
+    &.text-success-custom{
+        background-color: rgb(44, 190, 44);
+        color: white;
+        &:active{
+            background-color: rgb(243, 115, 115);
+        }
+    }
 }
 
 .custom-icon-engine{

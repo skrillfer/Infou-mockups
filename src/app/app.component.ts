@@ -61,6 +61,7 @@ export class AppComponent {
 
   // Signout Button
   signout() {
+    this.auth.logout();
     this.router.navigate(['/signin']);
     this.menuController.enable(false); // Make Sidemenu disable
   }

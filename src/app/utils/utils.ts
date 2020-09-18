@@ -15,18 +15,18 @@ export const getCurrentMonthLastDay = (date: Date) => {
 
 export const getMonthName = (date:Date) =>{
     var month = new Array();
-    month[0] = "January";
-    month[1] = "February";
-    month[2] = "March";
-    month[3] = "April";
-    month[4] = "May";
-    month[5] = "June";
-    month[6] = "July";
-    month[7] = "August";
-    month[8] = "September";
-    month[9] = "October";
-    month[10] = "November";
-    month[11] = "December";
+    month[0] = "Enero";
+    month[1] = "Febrero";
+    month[2] = "Marzo";
+    month[3] = "Abril";
+    month[4] = "Mayo";
+    month[5] = "Junio";
+    month[6] = "Julio";
+    month[7] = "Agosto";
+    month[8] = "Septiembre";
+    month[9] = "Octubre";
+    month[10] = "Noviembre";
+    month[11] = "Diciembre";
     return month[date.getMonth()];
 }
 

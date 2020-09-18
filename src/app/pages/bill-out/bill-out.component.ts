@@ -86,18 +86,18 @@ export class BillOutComponent implements OnInit {
   async billOutGenerateReport(){
 
     const user = await this.storage.get('USER_INFO');
-    const fileName = `reporte_${getMonthName(new Date(Number(this.profileForm.value['year']),Number(this.profileForm.value['month']),1))}`
+    const fileName = `[O]Reporte_${getMonthName(new Date(Number(this.profileForm.value['year']),Number(this.profileForm.value['month']),1))}_${this.profileForm.value['year']}`
     this.dat.billOutGenerateReport({name:fileName,bills:this.allBillOut,user},{responseType:'blob'}).subscribe((resp:any)=>{
       const blob:any = new Blob([resp], {type: "application/pdf"});
-      //console.log(blob);
       try {
         var reader = new FileReader();
         reader.readAsDataURL(blob); 
         reader.onloadend = async () =>{
-          var base64data:any = reader.result;  
-          //console.log(base64data);              
+          var base64data:any = reader.result; 
+          //const objectUrl = window.URL.createObjectURL(blob)
+          //window.open(objectUrl) 
           await Filesystem.writeFile({
-            path: fileName,
+            path: `${fileName}.pdf`,
             data: base64data,
             directory: FilesystemDirectory.Documents,
             // encoding: FilesystemEncoding.UTF8

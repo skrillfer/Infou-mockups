@@ -12,8 +12,8 @@ import { SignInContainer,User, BillIn, Establishment, BillOut } from './interfac
   providedIn: 'root'
 })
 export class DataService {
-  private host:string = 'http://localhost:42100'
-
+  //private host:string = 'http://localhost:42100';
+  private host:string = 'https://infoutility-app-1.herokuapp.com';
   // LOGIN
   private apiLogin:any=`${this.host}/users/login`;
   // REGISTER
@@ -90,6 +90,10 @@ export class DataService {
 
   getByFilterBillIn(condition){
     return this.http.post(`${this.apiBillIn}/filter`,condition).pipe(data => data);
+  }
+
+  billInGenerateReport(body,responseType){
+    return this.http.post(`${this.apiBillIn}/generate_report`,body,responseType).pipe(data => data);
   }
 
   // Bill-out

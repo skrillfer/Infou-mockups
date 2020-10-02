@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { LoadingController } from '@ionic/angular';
 import { BackendResponse } from 'src/app/services/interface.services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -33,28 +34,52 @@ export class SignupComponent implements OnInit {
   });
 
   constructor(private loadingController: LoadingController,
-    private dat: DataService) { }
+    private dat: DataService, private router: Router) { }
 
   ngOnInit() {}
  
   onSumbitSignUp(){
     if(this.profileForm.valid){
-      const { password, confirmPassword,  ...othersValues } = this.profileForm.value;
+      const { password, email, confirmPassword,  ...othersValues } = this.profileForm.value;
       if(password !== confirmPassword){
         this.dat.presentAlertConfirm(['Entendido'],'Verificar','Complete los datos requeridos.');
         return;
       }
-      this.dat.userSignUp({...othersValues,password,idBank:"", isFinalUser:1}).subscribe((resp:BackendResponse) => {
-        const { status, message } = resp;
-        if(status){
-          this.dat.presentAlertConfirm(['Entendido'],'Exito',`Su usuario fue registrado correctamente, recibira un correo de confirmacion a ${othersValues.email}.`);
-        }else{
-          this.dat.presentAlertConfirm(['Entendido'],'Error',message);
-        }
+      this.loadingController.create({
+        message: 'Procesando...',
+        backdropDismiss: true
+      }).then((res) => {
+        res.present();
+        this.dat.userSignUp({...othersValues,email:email.trim(), password:password.trim(),idBank:"", isFinalUser:1}).subscribe((resp:BackendResponse) => {
+          const { status, message } = resp;
+          this.hideLoader();
+          if(status){
+            this.dat.presentAlertConfirm(
+              [{
+                text:'Entendido',
+                handler: () => {
+                  this.router.navigateByUrl('/signin');
+                }
+              }],
+              'Exito',`Su usuario fue registrado correctamente, recibira un correo de confirmacion a ${othersValues.email}.`);
+          }else{
+            this.dat.presentAlertConfirm(['Entendido'],'Error',message);
+          }
+        },(err)=>{
+          this.hideLoader();
+          this.dat.presentAlertConfirm(['Entendido'],'Error',err.message);
+        });
       });
     }else{
       this.dat.presentAlertConfirm(['Entendido'],'Faltan datos','Por favor complete todos los campos requeridos.')
-    }
-    
+    } 
+  }
+
+  hideLoader() {
+    this.loadingController.dismiss().then((res) => {
+      console.log('Loading dismissed!', res);
+    }).catch((error) => {
+      console.log('error', error);
+    });
   }
 }

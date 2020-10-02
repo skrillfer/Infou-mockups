@@ -21,7 +21,7 @@
 <ion-content id="signup" fullscreen>
   <div class="section_one">
     <h2>Nueva cuenta</h2>
-    <p>Completa los datos y crea tu cuenta</p>
+    <p>Los datos con <span style="color: red;">*</span> (asterisco) son obligatorios.</p>
   </div>
 
   <!-- SignUp Form -->
@@ -92,15 +92,15 @@
 
 
         <ion-item style="padding-top: 12px;">
-          <ion-label class="ion-text-wrap required" position="stacked">
+          <ion-label class="ion-text-wrap" position="stacked">
             Segundo Nombre  
           </ion-label>
           <ion-input class="input-custom"  type="text" placeholder="" formControlName="secondName"></ion-input>
         </ion-item>
 
         <ion-item style="padding-top: 12px;">
-          <ion-label class="ion-text-wrap required" position="stacked">
-            Tercer Nombre  
+          <ion-label class="ion-text-wrap" position="stacked">
+            Otros nombres  
           </ion-label>
           <ion-input class="input-custom"  type="text" placeholder="" formControlName="thirdName"></ion-input>
         </ion-item>
@@ -114,14 +114,14 @@
         </ion-item>
 
         <ion-item style="padding-top: 12px;">
-          <ion-label class="ion-text-wrap required" position="stacked">
+          <ion-label class="ion-text-wrap" position="stacked">
             Segundo Apellido  
           </ion-label>
           <ion-input class="input-custom"  type="text" placeholder="" formControlName="secondLastName"></ion-input>
         </ion-item>
 
         <ion-item style="padding-top: 12px;">
-          <ion-label class="ion-text-wrap required" position="stacked">
+          <ion-label class="ion-text-wrap" position="stacked">
             Apellido de Casada  
           </ion-label>
           <ion-input class="input-custom"  type="text" placeholder="" formControlName="marriedLastName"></ion-input>
@@ -131,14 +131,14 @@
           <ion-label class="ion-text-wrap required" position="stacked">
             Password  
           </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="password"></ion-input>
+          <ion-input class="input-custom"  type="password" placeholder="" formControlName="password"></ion-input>
         </ion-item>
 
         <ion-item style="padding-top: 12px;">
           <ion-label class="ion-text-wrap required" position="stacked">
             Confirmar Password  
           </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="confirmPassword"></ion-input>
+          <ion-input class="input-custom"  type="password" placeholder="" formControlName="confirmPassword"></ion-input>
         </ion-item>
 
       </ion-list>

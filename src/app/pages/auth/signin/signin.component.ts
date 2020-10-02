@@ -4,6 +4,7 @@ import { DataService } from 'src/app/services/data.service';
 import { BackendResponse } from 'src/app/services/interface.services';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { LoadingController, MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signin',
@@ -18,26 +19,47 @@ export class SigninComponent implements OnInit {
 
   constructor(private dat: DataService,
     private router: Router,
-    private auth: AuthenticationService) { }
+    private auth: AuthenticationService,
+    private loadingController: LoadingController,
+    private menuController: MenuController,
+    ) { }
 
   ngOnInit() {}
 
   onSignInSubmit(){
     if(this.profileForm.valid){
       const {email, password} = this.profileForm.value;
-      this.dat.userSignIn({email,password,loginType:""}).subscribe((resp:BackendResponse) => {
-        if(resp.status){
-          this.auth.login(resp.data);
-          this.router.navigateByUrl("/tabs/tab3");
-        }else{
-          this.dat.presentAlertConfirm(['Entendido'],'Error',resp.message);
-        }
-      },(err)=>{
-        this.dat.presentAlertConfirm(['Entendido'],'Error',err.message)
-      }); 
+      this.loadingController.create({
+        message: 'Procesando...',
+        backdropDismiss: true
+      }).then((res) => {
+        res.present();
+        this.dat.userSignIn({email,password,loginType:""}).subscribe((resp:BackendResponse) => {
+          this.hideLoader();
+          if(resp.status){
+            this.menuController.enable(true);
+            this.auth.login(resp.data);
+            this.router.navigateByUrl("/tabs/tab3");
+          }else{
+            this.dat.presentAlertConfirm(['Entendido'],'Error',resp.message);
+          }
+        },(err)=>{
+          this.hideLoader();
+          this.dat.presentAlertConfirm(['Entendido'],'Error',err.message)
+        }); 
+      });
+      
     }else{
       this.dat.presentAlertConfirm(['Entendido'],'Faltan datos','Por favor complete todos los campos requeridos.')
     }
+  }
+
+  hideLoader() {
+    this.loadingController.dismiss().then((res) => {
+      console.log('Loading dismissed!', res);
+    }).catch((error) => {
+      console.log('error', error);
+    });
   }
 
 }

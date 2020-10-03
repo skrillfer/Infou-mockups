@@ -29,13 +29,13 @@ import { LoginGuardService } from './services/login.guard.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth.guard.service';
 import { AuthInterceptorService } from './services/auth.interceptor.service';
+import { HeaderMenuBtnComponent } from './components/header-menu-btn/header-menu-btn.component';
 
 
 @NgModule({
   declarations: [AppComponent,
     ProductDetailsComponent,
-    CartComponent,
-    CheckoutComponent],
+    CartComponent, HeaderMenuBtnComponent],
   entryComponents: [ProductDetailsComponent,
     CartComponent,
     CheckoutComponent,

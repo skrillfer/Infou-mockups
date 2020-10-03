@@ -26,7 +26,7 @@ import { SearchbarComponent } from '../../components/searchbar/searchbar.compone
     ])
   ],
   declarations: [HomeComponent,
-    SearchComponent,
+    
     FeaturedProductsComponent,
     HotDealsComponent,
     CategoriesComponent,

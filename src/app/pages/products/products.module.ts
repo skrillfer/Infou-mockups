@@ -20,7 +20,7 @@ import { FilterComponent } from '../filter/filter.component';
       }
     ])
   ],
-  declarations: [ProductsComponent, FilterComponent],
+  declarations: [ProductsComponent],
   entryComponents: [FilterComponent]
 })
 export class ProductsModule { }

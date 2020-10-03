@@ -12,8 +12,8 @@ import { SignInContainer,User, BillIn, Establishment, BillOut } from './interfac
   providedIn: 'root'
 })
 export class DataService {
-  private host:string = 'http://localhost:42100';
-  //private host:string = 'https://infoutility-app-1.herokuapp.com';
+  //private host:string = 'http://localhost:42100';
+  private host:string = 'https://infoutility-app-1.herokuapp.com';
   // LOGIN
   private apiLogin:any=`${this.host}/users/login`;
   // REGISTER
@@ -25,6 +25,9 @@ export class DataService {
   
   // ESTABLISHMENT
   private apiEstablishment:any = `${this.host}/establishment`
+  
+  // NIT CONSULT
+  private apiEfactNit:any = `http://e-fact.com.gt/api/receipt/taxpayer`
   
   constructor(private http: HttpClient,
     private alertController: AlertController,
@@ -38,7 +41,10 @@ export class DataService {
 
   //In - FACT
   //Out - FACT
-
+  // Consult Nit
+  getInfoByNit(nit){
+    return this.http.get(`${this.apiEfactNit}/${nit}`).pipe(data=> data);
+  }
   // Auth Service
   userSignIn(sigin: SignInContainer){
     return this.http.post(this.apiLogin,sigin).pipe(data=> data);

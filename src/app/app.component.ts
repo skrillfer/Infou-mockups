@@ -49,7 +49,7 @@ export class AppComponent {
       const user = await this.auth.isAuthenticated();
       
       if (user) {
-        this.router.navigate(['/tabs/tab1']);
+        //this.router.navigate(['/tabs/tab3']);
         this.auth.authState.next(true);
       }else{
         this.router.navigate(['/signin']);

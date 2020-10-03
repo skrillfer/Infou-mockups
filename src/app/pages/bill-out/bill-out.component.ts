@@ -23,12 +23,27 @@ export class BillOutComponent implements OnInit {
   constructor(public modalController: ModalController,
     private loadingController: LoadingController,
     private dat: DataService,private storage: Storage) {
+      
+  }
+  
+  ngOnInit(){
+
+  }
+
+  initView(){
+    this.loadingController.create({
+      message: 'Cargando...',
+      backdropDismiss: true
+    }).then((res) => {
+      res.present();
+
       const date = new Date();
 
       this.profileForm = new FormGroup({
         year: new FormControl(date.getFullYear()+''),
         month: new FormControl(date.getMonth()+'')       
       });
+      
       this.dat.getByFilterBillOut({
         date: {
           $gte: getCurrentMonthFirstDay(new Date()),
@@ -39,6 +54,10 @@ export class BillOutComponent implements OnInit {
           this.allBillOut = resp.data;
         }
         this.loading = false;
+        this.hideLoader();
+      },(err)=>{
+        this.loading = false;
+        this.hideLoader();
       });
 
       this.profileForm.controls['year'].valueChanges.subscribe(val => {
@@ -55,6 +74,9 @@ export class BillOutComponent implements OnInit {
               this.allBillOut = resp.data;
             }
             this.loading = false;
+          },(err)=>{
+            this.loading = false;
+            this.hideLoader();
           });
         }
       });
@@ -73,14 +95,29 @@ export class BillOutComponent implements OnInit {
                 this.allBillOut = resp.data;
               }
               this.loading = false;
+            },(err)=>{
+              this.loading = false;
+              this.hideLoader();
             });
           }
         }
       });
+    });
   }
-  
-  ngOnInit(){
 
+  ionViewWillEnter() {
+    this.allBillOut = [];
+    this.loading = true;
+    this.profileForm = null;
+    this.initView();
+  }
+
+  hideLoader() {
+    this.loadingController.dismiss().then((res) => {
+      console.log('Loading dismissed!', res);
+    }).catch((error) => {
+      console.log('error', error);
+    });
   }
 
   async billOutGenerateReport(){
@@ -122,6 +159,8 @@ export class BillOutComponent implements OnInit {
         ];
         this.dat.presentAlertConfirm(buttons,header,error.message);
       }
+    },(err)=>{
+      this.dat.presentAlertConfirm(["Entendido"],"Error",err.message);
     });
   }
   receivedCreated(event:BillIn){
@@ -168,6 +207,8 @@ export class BillOutComponent implements OnInit {
             }else{
               this.dat.presentAlertConfirm(["Entendido"],"Error",resp.message);
             }
+          },(err)=>{
+            this.dat.presentAlertConfirm(["Entendido"],"Error",err.message);
           });
         }
       },

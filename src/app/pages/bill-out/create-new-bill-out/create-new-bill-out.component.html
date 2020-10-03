@@ -40,36 +40,28 @@
           <!-- date -->
           <ion-item  class="ion-no-padding" style="width: 100%;">
             <ion-row>
+
               <ion-col size="auto">
+                
                 <ion-label [class]="'ion-text-wrap recize-label required'" position="stacked">
                   Fecha
                 </ion-label>
-                <ion-input 
+                <!--
+                <ion-input
+                  id="inputDate"
                   placeholder="" 
                   class="input-custom" 
                   style="display: block; margin-top: 8px;"  
                   type="date" 
                   formControlName="date"></ion-input>  
+                -->
+                <ion-datetime formControlName="date" placeholder="Selecciona fecha" display-format="YYYY, MMM, DD" monthShortNames="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"></ion-datetime>
                 <span style="font-size: 12px; color:red"></span>
+                
               </ion-col>
+              
             </ion-row>
-          </ion-item>
-          <!-- name -->
-          <ion-item  class="ion-no-padding" style="width: 100%;">
-            <ion-row>
-              <ion-col size="auto">
-                <ion-label [class]="'ion-text-wrap recize-label required'" position="stacked">
-                  Nombre
-                </ion-label>
-                <ion-input 
-                  placeholder="" 
-                  class="input-custom" 
-                  style="display: block; margin-top: 8px;"  
-                  type="text" 
-                  formControlName="name"></ion-input>  
-                <span style="font-size: 12px; color:red"></span>
-              </ion-col>
-            </ion-row>
+            
           </ion-item>
           <!-- nit -->
           <ion-item  class="ion-no-padding" style="width: 100%;">
@@ -88,6 +80,25 @@
               </ion-col>
             </ion-row>
           </ion-item>
+
+          <!-- name -->
+          <ion-item  class="ion-no-padding" style="width: 100%;">
+            <ion-row style="width: 100%;">
+              <ion-col style="width: 100%;">
+                <ion-label [class]="'ion-text-wrap recize-label required'" position="stacked">
+                  Nombre
+                </ion-label>
+                <ion-input 
+                  placeholder="" 
+                  class="input-custom" 
+                  style="display: block; margin-top: 8px;"  
+                  type="text" 
+                  formControlName="name"></ion-input>  
+                <span style="font-size: 12px; color:red"></span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
           <!-- serie sat -->
           <ion-item  class="ion-no-padding" style="width: 100%;">
             <ion-row>

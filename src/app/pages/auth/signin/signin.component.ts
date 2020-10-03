@@ -39,7 +39,8 @@ export class SigninComponent implements OnInit {
           if(resp.status){
             this.menuController.enable(true);
             this.auth.login(resp.data);
-            this.router.navigateByUrl("/tabs/tab3");
+            //this.router.navigateByUrl("/tabs/tab3");
+            console.log('12');
           }else{
             this.dat.presentAlertConfirm(['Entendido'],'Error',resp.message);
           }

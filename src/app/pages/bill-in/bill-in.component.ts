@@ -24,8 +24,21 @@ export class BillInComponent implements OnInit {
     private loadingController: LoadingController,
     private storage: Storage,
     private dat: DataService) {
-      const date = new Date();
+      
+  }
+  
+  ngOnInit(){
 
+  }
+
+  initView(){
+    this.loadingController.create({
+      message: 'Cargando...',
+      backdropDismiss: true
+    }).then((res) => {
+      res.present();
+    
+      const date = new Date();
       this.profileForm = new FormGroup({
         year: new FormControl(date.getFullYear()+''),
         month: new FormControl(date.getMonth()+'')       
@@ -36,11 +49,15 @@ export class BillInComponent implements OnInit {
             $gte: getCurrentMonthFirstDay(new Date()),
             $lt: getCurrentMonthLastDay(new Date())
           }
-        }).subscribe((resp:BackendResponse)=>{
+      }).subscribe((resp:BackendResponse)=>{
         if(resp.status){
           this.allBillIn = resp.data;
         }
         this.loading = false;
+        this.hideLoader();
+      },(err) => {
+        this.loading = false;
+        this.hideLoader();
       });
 
       this.profileForm.controls['year'].valueChanges.subscribe(val => {
@@ -57,6 +74,10 @@ export class BillInComponent implements OnInit {
               this.allBillIn = resp.data;
             }
             this.loading = false;
+            this.hideLoader();
+          },(err)=>{
+            this.loading = false;
+            this.hideLoader();
           });
         }
       });
@@ -75,14 +96,30 @@ export class BillInComponent implements OnInit {
                 this.allBillIn = resp.data;
               }
               this.loading = false;
+              this.hideLoader();
+            },(err)=>{
+              this.loading = false;
+              this.hideLoader();
             });
           }
         }
       });
+    });
   }
   
-  ngOnInit(){
+  ionViewWillEnter() {
+    this.allBillIn = [];
+    this.loading = true;
+    this.profileForm = null;
+    this.initView();
+  }
 
+  hideLoader() {
+    this.loadingController.dismiss().then((res) => {
+      console.log('Loading dismissed!', res);
+    }).catch((error) => {
+      console.log('error', error);
+    });
   }
 
   receivedCreated(event:BillIn){
@@ -129,6 +166,8 @@ export class BillInComponent implements OnInit {
             }else{
               this.dat.presentAlertConfirm(["Entendido"],"Error",resp.message);
             }
+          },(err)=>{
+            this.dat.presentAlertConfirm(["Entendido"],"Error",err.message);
           });
         }
       },
@@ -178,6 +217,8 @@ export class BillInComponent implements OnInit {
         ];
         this.dat.presentAlertConfirm(buttons,header,error.message);
       }
+    },(err)=>{
+      this.dat.presentAlertConfirm(["Entendido"],"Error",err.message);
     });
   }
 

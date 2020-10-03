@@ -45,6 +45,7 @@ export class SigninComponent implements OnInit {
             this.dat.presentAlertConfirm(['Entendido'],'Error',resp.message);
           }
         },(err)=>{
+          console.log(err);
           this.hideLoader();
           this.dat.presentAlertConfirm(['Entendido'],'Error',err.message)
         }); 

@@ -35,7 +35,7 @@ import { HeaderMenuBtnComponent } from './components/header-menu-btn/header-menu
 @NgModule({
   declarations: [AppComponent,
     ProductDetailsComponent,
-    CartComponent, HeaderMenuBtnComponent],
+    CartComponent, HeaderMenuBtnComponent, CheckoutComponent],
   entryComponents: [ProductDetailsComponent,
     CartComponent,
     CheckoutComponent,

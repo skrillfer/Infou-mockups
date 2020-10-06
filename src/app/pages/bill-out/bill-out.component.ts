@@ -34,7 +34,7 @@ export class BillOutComponent implements OnInit {
     this.loadingController.create({
       message: 'Cargando...',
       backdropDismiss: true
-    }).then((res) => {
+    }).then(async (res) => {
       res.present();
 
       const date = new Date();
@@ -43,8 +43,10 @@ export class BillOutComponent implements OnInit {
         year: new FormControl(date.getFullYear()+''),
         month: new FormControl(date.getMonth()+'')       
       });
-      
+      const tokenUser = await  this.storage.get('USER_INFO');
+
       this.dat.getByFilterBillOut({
+        idUser: tokenUser.idUser,
         date: {
           $gte: getCurrentMonthFirstDay(new Date()),
           $lt: getCurrentMonthLastDay(new Date())

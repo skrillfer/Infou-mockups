@@ -4,6 +4,7 @@ import { ModalController, LoadingController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 import { EditEstablishmentComponent } from './edit-establishment/edit-establishment.component';
 import { CreateNewEstablishmentComponent } from './create-new-establishment/create-new-establishment.component';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-establishment',
@@ -16,16 +17,47 @@ export class EstablishmentComponent implements OnInit {
   loading = true;
   constructor(public modalController: ModalController,
     private loadingController: LoadingController,
-    private dat: DataService) {
-      this.dat.getAllEstablishments().subscribe((resp:BackendResponse)=>{
+    private dat: DataService,private storage: Storage) {
+      
+  }
+  
+  ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.allEstablishments = [];
+    this.loading = true;
+    this.initView();
+  }
+
+  initView(){
+    this.loadingController.create({
+      message: 'Cargando...',
+      backdropDismiss: true
+    }).then(async (res) => {
+      res.present();
+      const tokenUser = await  this.storage.get('USER_INFO');
+
+      this.dat.getByFilterEstablishment({idUser: tokenUser.idUser}).subscribe((resp:BackendResponse)=>{
         if(resp.status){
           this.allEstablishments = resp.data;
         }
         this.loading = false;
+        this.hideLoader();
+      },(err) => {
+        this.loading = false;
+        this.hideLoader();
       });
+    });
   }
-  
-  ngOnInit() {
+
+
+  hideLoader() {
+    this.loadingController.dismiss().then((res) => {
+      console.log('Loading dismissed!', res);
+    }).catch((error) => {
+      console.log('error', error);
+    });
   }
 
   receivedCreated(event:Establishment){

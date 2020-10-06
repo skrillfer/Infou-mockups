@@ -95,10 +95,15 @@ export class DataService {
   getOneEstablishment(id){
     return this.http.get(`${this.apiEstablishment}/${id}`).pipe(data => data);
   }
+  getByFilterEstablishment(condition){
+    return this.http.post(`${this.apiEstablishment}/filter`,condition).pipe(data => data);
+  }
+
   // Bill-in
   createBillIn(body:BillIn){
     return this.http.post(`${this.apiBillIn}`,body).pipe(data => data);
   }
+
 
   updateSpecificBillIn(id,body){
     return this.http.put(`${this.apiBillIn}/${id}`,body).pipe(data => data);

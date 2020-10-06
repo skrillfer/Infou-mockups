@@ -50,14 +50,16 @@ export class SignDocComponent implements OnInit {
   }
 
   downloadFile(id,name){
-    this.dat.presentAlertConfirm(['ok'],'MESJ',Capacitor.platform);
     try {
       this.dat.getOneDocument(id,{responseType:  'blob'})
       .subscribe(async (datablob:any) => {
         
         const blob:any = new Blob([datablob], {type: "application/pdf"});
         if(Capacitor.platform==='web'){
-          window.URL = window.URL || window.webkitURL;
+          try {
+            window.URL = window.URL || window.webkitURL;
+          } catch (error) {  
+          }
           window.open(window.URL.createObjectURL(blob));
         }else{
           const fileName = name;

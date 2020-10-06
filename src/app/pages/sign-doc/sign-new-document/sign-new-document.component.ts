@@ -17,7 +17,7 @@ export class SignNewDocumentComponent implements OnInit {
   _currentDocs=[];
   
   profileForm = new FormGroup({
-    //name: new FormControl('',[Validators.required])
+    password: new FormControl('',[Validators.required])
   });
 
   constructor( public modalController: ModalController, private dat: DataService, private loadingController: LoadingController, private storage: Storage) { }
@@ -33,8 +33,9 @@ export class SignNewDocumentComponent implements OnInit {
   }
 
   async signDocumentSubmit(){
-      
-      if(this._currentDocs.length>0){
+      const { password } = this.profileForm.value;
+
+      if(this._currentDocs.length>0 && password!==""){
 
         var formData = new FormData();
         formData.append("file", this._currentDocs[0]);
@@ -45,8 +46,9 @@ export class SignNewDocumentComponent implements OnInit {
         const tokenUser = await  this.storage.get('USER_INFO');
         console.log(tokenUser);
         request.setRequestHeader('Authorization', 'Bearer ' + tokenUser.token);
+        request.setRequestHeader('password', password);        
         request.send(formData);
-        
+    
         request.addEventListener("load", (evt) => {
           const { status,readyState,responseText,statusText } = evt.target as any;
           if (readyState == 4 && status == 200) {
@@ -54,14 +56,14 @@ export class SignNewDocumentComponent implements OnInit {
             if(statusResp){
               this.dat.presentAlertConfirm(['Entendido'],'Exito',message);
               this.dismiss();    
+              this.emitNewDocument();
               console.log(message);
             }else{
             }
           }else{
           }
         });
-        
-    
+      
       /*
       const { name, file } = this.profileForm.value;
       this.dat.createDocument({
@@ -82,6 +84,7 @@ export class SignNewDocumentComponent implements OnInit {
 
   changeListener(event:any){
     const pickedFile = (event.target as HTMLInputElement).files[0];
+
     if(!pickedFile){
       return;
     }
@@ -96,6 +99,6 @@ export class SignNewDocumentComponent implements OnInit {
     if(event.target.files && event.target.files.length) 
       this._currentDocs = event.target.files;
     
-    console.log(event);    
+   // console.log(event);    
   }
 }

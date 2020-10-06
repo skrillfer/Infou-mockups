@@ -32,6 +32,7 @@ import { AuthInterceptorService } from './services/auth.interceptor.service';
 import { HeaderMenuBtnComponent } from './components/header-menu-btn/header-menu-btn.component';
 import { SignDocModule } from './pages/sign-doc/sign-doc.module';
 import { SignNewDocumentComponent } from './pages/sign-doc/sign-new-document/sign-new-document.component';
+import { CheckoutModule } from './pages/checkout/checkout.module';
 
 
 @NgModule({
@@ -49,7 +50,7 @@ import { SignNewDocumentComponent } from './pages/sign-doc/sign-new-document/sig
     EditEstablishmentComponent,
     SignNewDocumentComponent
   ],
-  imports: [BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule,
+  imports: [BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule, CheckoutModule,
     BrowserAnimationsModule, IonicStorageModule.forRoot(), BillInModule, EstablishmentModule, BillOutModule, SignDocModule],
   providers: [
     DataService,

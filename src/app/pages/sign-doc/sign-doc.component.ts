@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Document, BackendResponse } from 'src/app/services/interface.services';
-import { ModalController, LoadingController } from '@ionic/angular';
+import { ModalController, LoadingController, NavController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 import { SignNewDocumentComponent } from './sign-new-document/sign-new-document.component';
 import { Storage } from '@ionic/storage';
@@ -16,7 +16,7 @@ export class SignDocComponent implements OnInit {
   allDocs=[];
   loading=true;
 
-  constructor(public modalController: ModalController, private loadingController: LoadingController, private dat: DataService, private storage: Storage) { 
+  constructor(public navCtrl: NavController, public modalController: ModalController, private loadingController: LoadingController, private dat: DataService, private storage: Storage) { 
     
     this.listDocuments();
     this.loading=false;
@@ -35,7 +35,11 @@ export class SignDocComponent implements OnInit {
     return await modal.present();
   }
 
-  receivedCreated(event:Document){
+  receivedCreated(event){
+    this.listDocuments();
+  }
+
+  refresh(){
     this.listDocuments();
   }
 

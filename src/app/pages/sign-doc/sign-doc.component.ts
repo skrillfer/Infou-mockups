@@ -4,7 +4,8 @@ import { ModalController, LoadingController, NavController } from '@ionic/angula
 import { DataService } from 'src/app/services/data.service';
 import { SignNewDocumentComponent } from './sign-new-document/sign-new-document.component';
 import { Storage } from '@ionic/storage';
-import { Capacitor, Filesystem, FilesystemDirectory } from '@capacitor/core';
+import { Capacitor,Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
+const { Filesystem } = Plugins;
 
 @Component({
   selector: 'app-sign-doc',

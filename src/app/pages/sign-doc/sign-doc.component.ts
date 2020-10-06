@@ -57,8 +57,11 @@ export class SignDocComponent implements OnInit {
         
         const blob:any = new Blob([datablob], {type: "application/pdf"});
         if(Capacitor.platform==='web'){
-          window.open("data:application/octet-stream;base64," + blob)
-
+          var reader = new FileReader();
+          reader.onload = function(e){
+            window.location.href = reader.result as any;
+          }
+          reader.readAsDataURL(blob);
           //window.open(window.URL.createObjectURL(blob));
         }else{
           const fileName = name;

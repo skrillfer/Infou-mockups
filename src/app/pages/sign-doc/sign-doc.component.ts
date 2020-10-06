@@ -60,7 +60,9 @@ export class SignDocComponent implements OnInit {
             window.URL = window.URL || window['webkitURL'];
           } catch (error) {  
           }
-          window.open(window.URL.createObjectURL(blob));
+          //window.open(window.URL.createObjectURL(blob));
+          var url = window.URL.createObjectURL(blob);
+          window.location.href = url;
         }else{
           const fileName = name;
           try {

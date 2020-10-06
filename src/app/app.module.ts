@@ -37,7 +37,7 @@ import { SignNewDocumentComponent } from './pages/sign-doc/sign-new-document/sig
 @NgModule({
   declarations: [AppComponent,
     ProductDetailsComponent,
-    CartComponent, HeaderMenuBtnComponent, CheckoutComponent],
+    CartComponent, HeaderMenuBtnComponent],
   entryComponents: [ProductDetailsComponent,
     CartComponent,
     CheckoutComponent,

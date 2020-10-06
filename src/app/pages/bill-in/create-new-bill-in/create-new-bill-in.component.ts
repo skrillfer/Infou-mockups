@@ -39,7 +39,8 @@ export class CreateNewBillInComponent implements OnInit {
               this.profileForm.patchValue({name:resp.return.nombre});
             }
           },(err)=>{
-            this.dat.presentAlertConfirm(['Entendido'],'Error',err.message)
+            console.log(err);
+            //this.dat.presentAlertConfirm(['Entendido'],'Error',err.message)
           });
         }
       });

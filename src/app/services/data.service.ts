@@ -12,8 +12,8 @@ import { SignInContainer,User, BillIn, Establishment, BillOut } from './interfac
   providedIn: 'root'
 })
 export class DataService {
-  //private host:string = 'http://localhost:42100';
-  private host:string = 'https://infoutility-app-1.herokuapp.com';
+  private host:string = 'http://localhost:42100';
+  //private host:string = 'https://infoutility-app-1.herokuapp.com';
   // LOGIN
   private apiLogin:any=`${this.host}/users/login`;
   // REGISTER

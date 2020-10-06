@@ -49,7 +49,8 @@ export class SignDocComponent implements OnInit {
     });
   }
 
-  downloadFile(id,name){    
+  downloadFile(id,name){
+    this.dat.presentAlertConfirm(['ok'],'MESJ',Capacitor.platform);
     try {
       this.dat.getOneDocument(id,{responseType:  'blob'})
       .subscribe(async (datablob:any) => {

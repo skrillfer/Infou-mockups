@@ -21,11 +21,12 @@ export class DataService {
   // BILL IN
   private apiBillIn:any = `${this.host}/bill-in`
   // BILL OUT
-  private apiBillOut:any = `${this.host}/bill-out`
-  
+  private apiBillOut:any = `${this.host}/bill-out`  
   // ESTABLISHMENT
   private apiEstablishment:any = `${this.host}/establishment`
-  
+  // DOCUMENT
+  public apiDocument:any = `${this.host}/signature`
+
   // NIT CONSULT
   private apiEfactNit:any = `http://e-fact.com.gt/api/receipt/taxpayer`
   
@@ -54,6 +55,27 @@ export class DataService {
     return this.http.post(`${this.apiRegister}`,user).pipe(data=> data);
   }
 
+    //Documents
+    createDocument(body:Document){
+      return this.http.post(`${this.apiDocument}`,body).pipe(data => data);
+    }
+
+    updateSpecificDocument(id,body){
+      return this.http.put(`${this.apiDocument}/${id}`,body).pipe(data => data);
+    }
+
+    deteleSpecificDocument(id){
+      return this.http.delete(`${this.apiDocument}/${id}`).pipe(data => data);
+    }
+    
+    getAllDocuments(body){
+      return this.http.post(`${this.apiDocument}/filter`,body).pipe(data => data);
+    }
+  
+    getOneDocument(id,responseType){
+      return this.http.get(`${this.apiDocument}/getFile/${id}`,responseType).pipe(data => data);
+    }
+  
   //Establishment
   createEstablishment(body:Establishment){
     return this.http.post(`${this.apiEstablishment}`,body).pipe(data => data);

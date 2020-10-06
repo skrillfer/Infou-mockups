@@ -82,3 +82,9 @@ export interface BackendResponse{
     message:string;
     data:any;
 }
+
+export interface Document{
+    _id?:string;
+    name:string;
+    state:string;
+};

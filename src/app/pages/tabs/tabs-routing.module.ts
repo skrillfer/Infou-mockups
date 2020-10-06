@@ -44,10 +44,20 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
+              import('../sign-doc/sign-doc.module').then(m => m.SignDocModule)
+          }
+        ]
+      }/*,
+      {
+        path: 'tab4',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
               import('../notification/notification.module').then(m => m.NotificationModule)
           }
         ]
-      },
+      }*/,
       {
         path: 'tab5',
         children: [

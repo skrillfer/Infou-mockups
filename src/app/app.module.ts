@@ -30,6 +30,8 @@ import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth.guard.service';
 import { AuthInterceptorService } from './services/auth.interceptor.service';
 import { HeaderMenuBtnComponent } from './components/header-menu-btn/header-menu-btn.component';
+import { SignDocModule } from './pages/sign-doc/sign-doc.module';
+import { SignNewDocumentComponent } from './pages/sign-doc/sign-new-document/sign-new-document.component';
 
 
 @NgModule({
@@ -44,9 +46,11 @@ import { HeaderMenuBtnComponent } from './components/header-menu-btn/header-menu
     EditBillInComponent,
     EditBillOutComponent,
     CreateNewEstablishmentComponent,
-    EditEstablishmentComponent],
+    EditEstablishmentComponent,
+    SignNewDocumentComponent
+  ],
   imports: [BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule,
-    BrowserAnimationsModule, IonicStorageModule.forRoot(), BillInModule, EstablishmentModule, BillOutModule],
+    BrowserAnimationsModule, IonicStorageModule.forRoot(), BillInModule, EstablishmentModule, BillOutModule, SignDocModule],
   providers: [
     DataService,
     LoginGuardService,

@@ -1,0 +1,53 @@
+#wishlist .card-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 150px;
+}
+#wishlist .product-name {
+    font-size: 1.2rem;
+    color: rgba(8, 8, 8, 0.58);
+}
+#wishlist .previous-price {
+    text-decoration: line-through;
+    font-size: 0.8rem;
+}
+#wishlist ion-fab-button {
+    --background: transparent;
+    --background-focused: transparent;
+    --background-activated: transparent;
+}
+.custom-icon {
+    border-radius: 50%;
+    background-color: blue;
+    color: white;
+    margin: 2px;
+    font-size: larger;
+}
+.custom-icon:active {
+    background-color: cadetblue;
+}
+.custom-icon.text-danger-custom {
+    font-size: large;
+    background-color: red;
+    color: white;
+}
+.custom-icon.text-danger-custom:active {
+    background-color: #f37373;
+}
+.custom-icon-engine {
+    background-color: transparent;
+    color: blue;
+    border-radius: 50%;
+    margin: 2px;
+    font-size: larger;
+}
+.custom-icon-engine:active {
+    background-color: lightsalmon;
+}
+.input-customer {
+    color: #666464;
+    margin-left: 18px;
+    border: none;
+    border-bottom: 1px solid black;
+}

@@ -13,7 +13,9 @@ import { SignInContainer,User, BillIn, Establishment, BillOut } from './interfac
 })
 export class DataService {
   //private host:string = 'http://localhost:42100';
-  private host:string = 'https://infoutility-app-1.herokuapp.com';
+  //private host:string = 'https://infoutility-app-1.herokuapp.com';
+  private host:string = 'http://e-fact.com.gt/api/efacturas';
+  
   // LOGIN
   private apiLogin:any=`${this.host}/users/login`;
   // REGISTER

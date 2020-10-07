@@ -4,6 +4,7 @@ import { ModalController, LoadingController, NavController } from '@ionic/angula
 import { DataService } from 'src/app/services/data.service';
 import { SignNewDocumentComponent } from './sign-new-document/sign-new-document.component';
 import { Storage } from '@ionic/storage';
+
 import { Capacitor,Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
 const { Filesystem } = Plugins;
 
@@ -17,7 +18,11 @@ export class SignDocComponent implements OnInit {
   allDocs=[];
   loading=true;
 
-  constructor(public navCtrl: NavController, public modalController: ModalController, private loadingController: LoadingController, private dat: DataService, private storage: Storage) { 
+  constructor(public navCtrl: NavController,
+     public modalController: ModalController, 
+     private loadingController: LoadingController, 
+     private dat: DataService,
+     private storage: Storage) { 
     
     this.listDocuments();
     this.loading=false;
@@ -75,6 +80,7 @@ export class SignDocComponent implements OnInit {
                 data: base64data,
                 directory: FilesystemDirectory.Documents,
               });
+              
               const header = 'Aviso!';
               const buttons = [
                 {

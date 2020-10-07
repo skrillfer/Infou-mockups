@@ -6,7 +6,7 @@ import { DataService } from 'src/app/services/data.service';
 import { EditBillInComponent } from './edit-bill-in/edit-bill-in.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { getCurrentMonthFirstDay, getCurrentMonthLastDay, getMonthName } from 'src/app/utils/utils';
-import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
+import { Capacitor, Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
 const { Filesystem } = Plugins;
 
 import { Storage } from '@ionic/storage';
@@ -188,28 +188,31 @@ export class BillInComponent implements OnInit {
     this.dat.billInGenerateReport({name:fileName,bills:this.allBillIn,user},{responseType:'blob'}).subscribe((resp:any)=>{
       const blob:any = new Blob([resp], {type: "application/pdf"});
       try {
-        var reader = new FileReader();
-        reader.readAsDataURL(blob); 
-        reader.onloadend = async () =>{
-          var base64data:any = reader.result; 
-          //const objectUrl = window.URL.createObjectURL(blob)
-          //window.open(objectUrl) 
-          await Filesystem.writeFile({
-            path: `${fileName}.pdf`,
-            data: base64data,
-            directory: FilesystemDirectory.Documents,
-            // encoding: FilesystemEncoding.UTF8
-          });
-          const header = 'Aviso!';
-          const buttons = [
-            {
-              text: 'Entendido',
-              handler: () => {}
-            }
-          ];
-          this.dat.presentAlertConfirm(buttons,header,`Se ha descargado ${fileName} en Documentos`);
+        if(Capacitor.platform==='web'){
+          window.open(window.URL.createObjectURL(blob));
+        }else{
+          var reader = new FileReader();
+          reader.readAsDataURL(blob); 
+          reader.onloadend = async () =>{
+            var base64data:any = reader.result; 
+            //const objectUrl = window.URL.createObjectURL(blob)
+            //window.open(objectUrl) 
+            await Filesystem.writeFile({
+              path: `${fileName}.pdf`,
+              data: base64data,
+              directory: FilesystemDirectory.Documents,
+              // encoding: FilesystemEncoding.UTF8
+            });
+            const header = 'Aviso!';
+            const buttons = [
+              {
+                text: 'Entendido',
+                handler: () => {}
+              }
+            ];
+            this.dat.presentAlertConfirm(buttons,header,`Se ha descargado ${fileName} en Documentos`);
+          }
         }
-         
       } catch (error) {
         const header = 'Error!';
         const buttons = [

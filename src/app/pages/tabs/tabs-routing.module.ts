@@ -14,7 +14,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../bill-out/bill-out.module').then(m => m.BillOutModule)
+              import('../sign-doc/sign-doc.module').then(m => m.SignDocModule)
           }
         ]
       },

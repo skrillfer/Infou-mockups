@@ -31,8 +31,8 @@ export class DataService {
   public apiDocument:any = `${this.host}/signature`
 
   // NIT CONSULT
-  //private apiEfactNit:any = `http://e-fact.com.gt/api/receipt/taxpayer`
-  private apiEfactNit:any = `https://hopeful-stonebraker-9a589e.netlify.app/api/receipt/taxpayer`
+  private apiEfactNit:any = `http://e-fact.com.gt/api/receipt/taxpayer`
+  //private apiEfactNit:any = `https://hopeful-stonebraker-9a589e.netlify.app/api/receipt/taxpayer`
   
   constructor(private http: HttpClient,
     private alertController: AlertController,

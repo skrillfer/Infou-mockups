@@ -14,7 +14,7 @@ import { SignInContainer,User, BillIn, Establishment, BillOut } from './interfac
 export class DataService {
   //private host:string = 'http://localhost:42100';
   //private host:string = 'https://infoutility-app-1.herokuapp.com';
-  private host:string = 'http://e-fact.com.gt/api/efacturas';
+  private host:string = 'http://192.241.159.190:41300';
   
   // LOGIN
   private apiLogin:any=`${this.host}/users/login`;
@@ -30,7 +30,7 @@ export class DataService {
   public apiDocument:any = `${this.host}/signature`
 
   // NIT CONSULT
-  private apiEfactNit:any = `http://e-fact.com.gt:41300`
+  private apiEfactNit:any = `http://e-fact.com.gt/api/receipt/taxpayer`
   
   constructor(private http: HttpClient,
     private alertController: AlertController,

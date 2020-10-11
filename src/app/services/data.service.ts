@@ -30,7 +30,7 @@ export class DataService {
   public apiDocument:any = `${this.host}/signature`
 
   // NIT CONSULT
-  private apiEfactNit:any = `http://e-fact.com.gt/api/receipt/taxpayer`
+  private apiEfactNit:any = `http://e-fact.com.gt:41300`
   
   constructor(private http: HttpClient,
     private alertController: AlertController,

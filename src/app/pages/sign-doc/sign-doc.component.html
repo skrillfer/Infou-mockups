@@ -44,6 +44,7 @@
               <th scope="col">#</th>
               <th scope="col">Documento</th>    
               <th scope="col">Estado</th>    
+              <th scope="col">Observación</th>    
               <th scope="col">
               </th>
             </tr>
@@ -54,8 +55,11 @@
               <td>{{doc.name}}</td>
               <td *ngIf="doc.state===1">Firmado</td>
               <td *ngIf="doc.state===0">Pendiente</td>
+              <td *ngIf="doc.state===-1">Error</td>
+              <td> {{doc?.messageInfile}} </td>
               <td>
-                <ion-icon (click)="downloadFile(doc._id,doc.name)" slot="icon-only" name="download" class="custom-icon-engine" ></ion-icon>
+                <ion-icon (click)="deleteFile(doc._id)" slot="icon-only" name="trash" class="custom-icon-engine" style="color: red"></ion-icon>
+                <ion-icon *ngIf="doc.state===1" (click)="downloadFile(doc._id,doc.name)" slot="icon-only" name="download" class="custom-icon-engine" ></ion-icon>
               </td>
             </tr>
             <tr *ngIf="allDocs.length===0 && loading===false">

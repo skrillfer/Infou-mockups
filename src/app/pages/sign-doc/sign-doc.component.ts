@@ -54,8 +54,32 @@ export class SignDocComponent implements OnInit {
 
     this.dat.getAllDocuments({idUser: tokenUser.idUser}).subscribe((resp:BackendResponse)=>{
       if(resp.status){
-        this.allDocs = [...resp.data];
+          this.allDocs=[];
+          resp.data.forEach(element => {
+          if(element.inactive===false)
+            this.allDocs.push(element);
+        });       
+        
+        this.allDocs.sort((a, b) => (a.name > b.name ? 1 : -1));
       }
+    });
+  }
+
+  deleteFile(id){
+    this.dat.deteleSpecificDocument(id).subscribe((resp:BackendResponse)=>{
+      const header = 'Aviso!';
+      const buttons = [
+        {
+          text: 'Entendido',
+          handler: () => {}
+        }
+      ];
+      if(resp.status && resp.status===true)
+            this.dat.presentAlertConfirm(buttons,header,`Documento Eliminado!`);
+      else
+        this.dat.presentAlertConfirm(buttons,header,`Problemas al eliminar documento`);
+
+      this.listDocuments();
     });
   }
 

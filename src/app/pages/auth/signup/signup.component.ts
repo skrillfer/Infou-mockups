@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
     if(this.profileForm.valid){
       const { password, email, confirmPassword,  ...othersValues } = this.profileForm.value;
       if(password !== confirmPassword){
-        this.dat.presentAlertConfirm(['Entendido'],'Verificar','Complete los datos requeridos.');
+        this.dat.presentAlertConfirm(['Entendido'],'Verificar','Passwords no coinciden.');
         return;
       }
       this.loadingController.create({

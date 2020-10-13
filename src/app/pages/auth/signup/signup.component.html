@@ -49,38 +49,12 @@
           <ion-input placeholder="" class="input-custom"  type="text" formControlName="email"></ion-input>
         </ion-item>
 
+        
         <ion-item style="padding-top: 12px;">
           <ion-label class="ion-text-wrap required" position="stacked">
-            Establecimiento por defecto  
+            Direccion  
           </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="defaultEstablishment"></ion-input>
-        </ion-item>
-        <ion-item style="padding-top: 12px;">
-          <ion-label class="ion-text-wrap required" position="stacked">
-            Regimen ISR  
-          </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="regimenISR"></ion-input>
-        </ion-item>
-
-        <ion-item style="padding-top: 12px;">
-          <ion-label class="ion-text-wrap required" position="stacked">
-            Regimen IVA  
-          </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="regimenIVA"></ion-input>
-        </ion-item>
-
-        <ion-item style="padding-top: 12px;">
-          <ion-label class="ion-text-wrap required" position="stacked">
-            Direccion Fiscal  
-          </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="fiscalAddress"></ion-input>
-        </ion-item>
-
-        <ion-item style="padding-top: 12px;">
-          <ion-label class="ion-text-wrap required" position="stacked">
-            Direccion Comercial  
-          </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="commercialAddress"></ion-input>
+          <ion-input class="input-custom"  type="text" placeholder="" formControlName="address"></ion-input>
         </ion-item>
 
         <ion-item style="padding-top: 12px;">
@@ -145,32 +119,6 @@
     </form>
   </div>
   <div class="section_three ion-padding">
-    <form [formGroup]="profileForm" class="ion-padding">
-      <!-- Personal Information -->
-      
-      <ion-item lines="none" style="display: -webkit-inline-box;">
-        <ion-label position="stacked" style="font-size: 22px;">
-          <ion-icon name="card" color="color2">
-          </ion-icon> Detalle de membresia
-        </ion-label>
-      </ion-item>
-      
-      <ion-list lines="full" class="ion-margin">
-        <ion-item >
-          <ion-label class="ion-text-wrap required" position="stacked">
-            Membresia
-          </ion-label>
-          <ion-input placeholder="" class="input-custom"  type="text" formControlName="membership"></ion-input>
-        </ion-item>
-
-        <ion-item style="padding-top: 12px;">
-          <ion-label class="ion-text-wrap required" position="stacked">
-            Periodo de cobro  
-          </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="paymentPeriod"></ion-input>
-        </ion-item>
-      </ion-list>
-      
       <!-- SignUp Button -->
       <div class="buttons ion-padding-top">
         <ion-button (click)="onSumbitSignUp()" [disabled]="!profileForm.valid" expand="block" color="color1" >
@@ -181,6 +129,5 @@
           <ion-text><strong>Cancelar</strong></ion-text>
         </ion-button>
       </div>
-    </form>
   </div>
 </ion-content>

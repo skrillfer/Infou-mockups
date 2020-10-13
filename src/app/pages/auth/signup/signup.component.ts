@@ -14,12 +14,12 @@ export class SignupComponent implements OnInit {
   profileForm = new FormGroup({
     email: new FormControl('',[Validators.required,Validators.email]),
     nit: new FormControl('',[Validators.required]),
-    defaultEstablishment: new FormControl('',[Validators.required]),
-    regimenISR: new FormControl('',[Validators.required]),
-    regimenIVA: new FormControl('',[Validators.required]),
-    fiscalAddress: new FormControl('',[Validators.required]),
+    //defaultEstablishment: new FormControl('',[Validators.required]),
+    //regimenISR: new FormControl('',[Validators.required]),
+    //regimenIVA: new FormControl('',[Validators.required]),
+    address: new FormControl('',[Validators.required]),
 
-    commercialAddress : new FormControl('',[Validators.required]),
+    //commercialAddress : new FormControl('',[Validators.required]),
     firstName : new FormControl('',[Validators.required]),
     secondName : new FormControl(''),
     thirdName : new FormControl(''),
@@ -29,8 +29,8 @@ export class SignupComponent implements OnInit {
     password : new FormControl('',[Validators.required]),
     confirmPassword : new FormControl('',[Validators.required]),
 
-    membership  : new FormControl('',[Validators.required]),
-    paymentPeriod  : new FormControl('',[Validators.required])
+    //membership  : new FormControl('',[Validators.required]),
+    //paymentPeriod  : new FormControl('',[Validators.required])
   });
 
   constructor(private loadingController: LoadingController,

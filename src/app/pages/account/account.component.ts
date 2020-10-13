@@ -9,39 +9,27 @@ import { Storage } from '@ionic/storage';
 })
 export class AccountComponent implements OnInit {
   profileForm = new FormGroup({
-    email: new FormControl('',[Validators.required,Validators.email]),
     nit: new FormControl('',[Validators.required]),
-    defaultEstablishment: new FormControl('',[Validators.required]),
-    regimenISR: new FormControl('',[Validators.required]),
-    regimenIVA: new FormControl('',[Validators.required]),
-    fiscalAddress: new FormControl('',[Validators.required]),
+    address: new FormControl('',[Validators.required]),
 
-    commercialAddress : new FormControl('',[Validators.required]),
     firstName : new FormControl('',[Validators.required]),
     secondName : new FormControl(''),
     thirdName : new FormControl(''),
     lastName : new FormControl('',[Validators.required]),
     secondLastName : new FormControl(''),
-    marriedLastName : new FormControl(''),
-    
-    membership  : new FormControl('',[Validators.required]),
-    paymentPeriod  : new FormControl('',[Validators.required])
+    marriedLastName : new FormControl('')    
   });
   constructor(private storage: Storage) {
     this.storage.get('USER_INFO').then(us=>{
-      const{email,nit,defaultEstablishment,
-        regimenISR,regimenIVA,fiscalAddress,
-        commercialAddress,firstName,secondName,
+      const{nit,address,firstName,secondName,
         thirdName,lastName,secondLastName,
-        marriedLastName,membership,paymentPeriod}
+        marriedLastName}
         = us;
         //console.log(us);
       this.profileForm.patchValue({
-        email,nit,defaultEstablishment,
-        regimenISR,regimenIVA,fiscalAddress,
-        commercialAddress,firstName,secondName,
+        nit,address,firstName,secondName,
         thirdName,lastName,secondLastName,
-        marriedLastName,membership,paymentPeriod
+        marriedLastName
       });
     });
     

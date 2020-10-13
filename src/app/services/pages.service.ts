@@ -10,7 +10,7 @@ export class PagesService {
   getPages() {
     return [
       {
-        title: 'Home',
+        title: 'Inicio',
         url: '/tabs/tab1',
         icon: 'home'
       },

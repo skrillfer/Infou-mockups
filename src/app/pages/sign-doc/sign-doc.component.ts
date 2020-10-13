@@ -52,14 +52,9 @@ export class SignDocComponent implements OnInit {
   async listDocuments(){
     const tokenUser = await  this.storage.get('USER_INFO');
 
-    this.dat.getAllDocuments({idUser: tokenUser.idUser}).subscribe((resp:BackendResponse)=>{
+    this.dat.getAllDocuments({idUser: tokenUser.idUser,inactive:false}).subscribe((resp:BackendResponse)=>{
       if(resp.status){
-          this.allDocs=[];
-          resp.data.forEach(element => {
-          if(element.inactive===false)
-            this.allDocs.push(element);
-        });       
-        
+        this.allDocs=resp.data;        
         this.allDocs.sort((a, b) => (a.name > b.name ? 1 : -1));
       }
     });
@@ -84,6 +79,7 @@ export class SignDocComponent implements OnInit {
   }
 
   downloadFile(id,name){
+    
     try {
       this.dat.getOneDocument(id,{responseType:  'blob'})
       .subscribe(async (datablob:any) => {
@@ -115,6 +111,7 @@ export class SignDocComponent implements OnInit {
               this.dat.presentAlertConfirm(buttons,header,`Se ha descargado ${name} en Documentos`);
             }
           } catch (error) {
+
             const header = 'Error!';
             const buttons = [
               {
@@ -127,6 +124,7 @@ export class SignDocComponent implements OnInit {
         }
         });
     } catch(e) {
+
       const header = 'Error!';
       const buttons = [
         {

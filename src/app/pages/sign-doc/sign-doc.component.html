@@ -37,6 +37,33 @@
   </div>
   <div class="section_one">
     <div class="container">
+      <br>
+      <ion-card *ngIf="allDocs.length===0 && loading===false">
+        <ion-item>
+          <!--<ion-icon name="pin" slot="start"></ion-icon> -->
+          <ion-label>Sin documentos disponibles</ion-label>
+        </ion-item>
+      </ion-card>
+
+      <ion-card *ngFor="let doc of allDocs; let i=index;">
+        <ion-item>
+          <!--<ion-icon name="pin" slot="start"></ion-icon> -->
+          <ion-label><b>{{i+1}}.</b> {{doc.name}}</ion-label>
+          <ion-button fill="transparent" (click)="deleteFile(doc._id)">
+            <ion-icon slot="icon-only" name="trash" class="custom-icon-engine" style="color: red"></ion-icon>
+          </ion-button>
+          <ion-button *ngIf="doc.state===1" fill="transparent" (click)="downloadFile(doc._id,doc.name)" >
+            <ion-icon slot="icon-only" name="download" class="custom-icon-engine" style="color: blue"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-card-content>
+          <b *ngIf="doc.state===1" style="color:#4CAF50">Firmado</b>
+          <b *ngIf="doc.state===0" style="color:yellow">Pendiente</b>
+          <b *ngIf="doc.state===-1" style="color:red">Error</b>
+           &nbsp;&nbsp;&nbsp;&nbsp; {{doc?.messageInfile}}
+        </ion-card-content>
+      </ion-card>
+      <!--
       <div class="table-responsive">    
         <table class="table table-striped" style="overflow-x: scroll;">
           <thead>
@@ -67,7 +94,7 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </div>-->
     </div>
   </div>  
 </ion-content>

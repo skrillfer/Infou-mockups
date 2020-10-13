@@ -35,7 +35,7 @@ export class AccountComponent implements OnInit {
         thirdName,lastName,secondLastName,
         marriedLastName,membership,paymentPeriod}
         = us;
-        console.log(us);
+        //console.log(us);
       this.profileForm.patchValue({
         email,nit,defaultEstablishment,
         regimenISR,regimenIVA,fiscalAddress,

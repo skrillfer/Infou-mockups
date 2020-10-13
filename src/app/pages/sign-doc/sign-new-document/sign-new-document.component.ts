@@ -36,47 +36,42 @@ export class SignNewDocumentComponent implements OnInit {
       const { password } = this.profileForm.value;
 
       if(this._currentDocs.length>0 && password!==""){
-
-        var formData = new FormData();
-        formData.append("file", this._currentDocs[0]);
-        
-        var request = new XMLHttpRequest();
-        
-        request.open("POST", `${this.dat.apiDocument}`);
-        const tokenUser = await  this.storage.get('USER_INFO');
-        console.log(tokenUser);
-        request.setRequestHeader('Authorization', 'Bearer ' + tokenUser.token);
-        request.setRequestHeader('password', password);        
-        request.send(formData);
-    
-        request.addEventListener("load", (evt) => {
-          const { status,readyState,responseText,statusText } = evt.target as any;
-          if (readyState == 4 && status == 200) {
-            const { status:statusResp, data, message} = JSON.parse(responseText) as BackendResponse;
-            if(statusResp){
-              this.dat.presentAlertConfirm(['Entendido'],'Exito',message);
-              this.dismiss();    
-              this.emitNewDocument();
-              console.log(message);
-            }else{
-            }
-          }else{
-          }
-        });
+        try {
+          
+          const loading = await this.loadingController.create({
+            cssClass: 'my-custom-class',
+            message: 'Por favor espere...'
+          });
+          await loading.present();
       
-      /*
-      const { name, file } = this.profileForm.value;
-      this.dat.createDocument({
-        name, file
-      }).subscribe((resp:BackendResponse) => {
-        if(resp.status){
-          this.emitNewEstablishment(resp.data);
-          this.dat.presentAlertConfirm(['Entendido'],'Exito','Documento agregado para firmar correctamente.')
-          this.dismiss();
+          var formData = new FormData();
+          formData.append("file", this._currentDocs[0]);
+          
+          var request = new XMLHttpRequest();
+          
+          request.open("POST", `${this.dat.apiDocument}`);
+          const tokenUser = await  this.storage.get('USER_INFO');
+          request.setRequestHeader('Authorization', 'Bearer ' + tokenUser.token);
+          request.setRequestHeader('password', password);        
+          request.send(formData);
+      
+          request.addEventListener("load", async (evt) => {
+            const { status,readyState,responseText,statusText } = evt.target as any;
+            if (readyState == 4 && status == 200) {
+              const { status:statusResp, data, message} = JSON.parse(responseText) as BackendResponse;
+              if(statusResp){
+                this.dat.presentAlertConfirm(['Entendido'],'Exito',message);
+                this.dismiss();    
+                this.emitNewDocument(); 
+              }
+            }
+            loading.dismiss();
+          }); 
+        } catch (error) {
+          console.log(error);
+          
         }
-      },(error)=>{
-        this.dat.presentAlertConfirm(['Entendido'],'Error',error.message)
-      });*/
+      
     }else{
       this.dat.presentAlertConfirm(['Entendido'],'Faltan datos','Por favor complete todos los campos requeridos.')
     }
@@ -101,4 +96,6 @@ export class SignNewDocumentComponent implements OnInit {
     
    // console.log(event);    
   }
+
+
 }

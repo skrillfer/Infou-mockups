@@ -19,7 +19,7 @@
     </ion-buttons>
 
     <!-- Page title -->
-    <ion-title>Account</ion-title>
+    <ion-title>Cuenta</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -47,36 +47,9 @@
 
         <ion-item style="padding-top: 12px;">
           <ion-label class="recize-label" position="stacked">
-            Establecimiento por defecto  
-          </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="defaultEstablishment"></ion-input>
-        </ion-item>
-        <ion-item style="padding-top: 12px;">
-          <ion-label class="recize-label" position="stacked">
-            Regimen ISR  
-          </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="regimenISR"></ion-input>
-        </ion-item>
-
-        <ion-item style="padding-top: 12px;">
-          <ion-label class="recize-label" position="stacked">
-            Regimen IVA  
-          </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="regimenIVA"></ion-input>
-        </ion-item>
-
-        <ion-item style="padding-top: 12px;">
-          <ion-label class="recize-label" position="stacked">
-            Direccion Fiscal  
+            Dirección  
           </ion-label>
           <ion-input class="input-custom"  type="text" placeholder="" formControlName="fiscalAddress"></ion-input>
-        </ion-item>
-
-        <ion-item style="padding-top: 12px;">
-          <ion-label class="recize-label" position="stacked">
-            Direccion Comercial  
-          </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="commercialAddress"></ion-input>
         </ion-item>
 
         <ion-item style="padding-top: 12px;">
@@ -85,7 +58,6 @@
           </ion-label>
           <ion-input class="input-custom"  type="text" placeholder="" formControlName="firstName"></ion-input>
         </ion-item>
-
 
         <ion-item style="padding-top: 12px;">
           <ion-label class="recize-label" position="stacked">
@@ -129,32 +101,6 @@
     <form [formGroup]="profileForm" class="ion-padding">
       <!-- Personal Information -->
       
-      <ion-item lines="none" >
-        <ion-label position="stacked" style="font-size: 22px;">
-          <ion-icon name="card" color="color2">
-          </ion-icon> Detalle de membresia
-        </ion-label>
-      </ion-item>
-      
-      <ion-list lines="full" class="ion-margin">
-        <ion-item >
-          <ion-label class="recize-label" position="stacked">
-            Membresia
-          </ion-label>
-          <ion-input placeholder="" class="input-custom"  type="text" formControlName="membership"></ion-input>
-        </ion-item>
-
-        <ion-item style="padding-top: 12px;">
-          <ion-label class="recize-label" position="stacked">
-            Periodo de cobro  
-          </ion-label>
-          <ion-input class="input-custom"  type="text" placeholder="" formControlName="paymentPeriod"></ion-input>
-        </ion-item>
-
-
-
-
-      </ion-list>
       
       
       

@@ -1,6 +1,6 @@
 {
   "appId": "infou.manager.bills",
-  "appName": "BillManager",
+  "appName": "e-sign",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

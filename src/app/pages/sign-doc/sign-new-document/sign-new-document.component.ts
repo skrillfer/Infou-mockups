@@ -93,8 +93,7 @@ export class SignNewDocumentComponent implements OnInit {
     }
     if(event.target.files && event.target.files.length) 
       this._currentDocs = event.target.files;
-    
-   // console.log(event);    
+
   }
 
 

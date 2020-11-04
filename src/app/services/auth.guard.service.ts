@@ -11,7 +11,7 @@ export class AuthGuardService implements CanActivate{
     this.auth.authState.subscribe(state => {
       this.loggedIn = state;
       if (state) {
-        this.router.navigate(['/tabs/tab3']);
+        this.router.navigate(['/tabs/tab1']);
       } else {
         this.router.navigate(['/signin']);
       }

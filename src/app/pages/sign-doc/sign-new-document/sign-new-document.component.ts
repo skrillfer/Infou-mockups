@@ -88,6 +88,7 @@ export class SignNewDocumentComponent implements OnInit {
       case 'application/pdf':
         break;
       default:
+        (event.target as HTMLInputElement).value = "";
         this.dat.presentAlertConfirm(['Entendido'],'Formato Invalido','El tipo de archivo que has seleccionado no es un archivo pdf, intentalo de nuevo.');
         return;
     }

@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Document, BackendResponse } from 'src/app/services/interface.services';
 import { ModalController, LoadingController, NavController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 import { SignNewDocumentComponent } from './sign-new-document/sign-new-document.component';
 import { Storage } from '@ionic/storage';
+import { castDateMongo } from 'src/app/utils/utils';
+import { ToastController } from '@ionic/angular';
 
 import { Capacitor,Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
+import { FormGroup, FormControl } from '@angular/forms';
 const { Filesystem } = Plugins;
 
 @Component({
@@ -14,18 +17,48 @@ const { Filesystem } = Plugins;
   styleUrls: ['./sign-doc.component.css']
 })
 export class SignDocComponent implements OnInit {
+  @ViewChild('input_search_by_name',{ static: true }) inputByName : HTMLInputElement;
 
-  allDocs=[];
+  castDateMongoRef = castDateMongo;
+  allDocs: Document[]=[];
   loading=true;
+  customPickerOptions: any;
 
+
+  profileForm : FormGroup = new FormGroup(
+    {
+      searchDate : new FormControl(null)
+    }
+    );
   constructor(public navCtrl: NavController,
      public modalController: ModalController, 
      private loadingController: LoadingController, 
      private dat: DataService,
-     private storage: Storage) { 
+     private storage: Storage,
+     public toastController: ToastController) { 
     
     this.listDocuments();
     this.loading=false;
+    this.customPickerOptions = {
+      buttons: [
+      {
+        text: 'Cancelar',
+        handler: () => {return true;}
+      },
+      {
+        text: 'Limpiar',
+        handler: () => this.profileForm.patchValue({ searchDate: null })
+      },
+      {
+        text: 'Hecho',
+        handler: (evt) => {
+          const {day,month,year} = evt;
+          this.profileForm.patchValue({ 
+            searchDate: new Date(year.value,month.value,day.value).toISOString().split('T')[0]  
+          })
+        }
+      }]
+    }
   }
 
   ngOnInit() {
@@ -52,10 +85,21 @@ export class SignDocComponent implements OnInit {
   async listDocuments(){
     const tokenUser = await  this.storage.get('USER_INFO');
 
-    this.dat.getAllDocuments({idUser: tokenUser.idUser,inactive:false}).subscribe((resp:BackendResponse)=>{
+    this.dat.getAllDocumentsByCondition({idUser: tokenUser.idUser,inactive:false}).subscribe((resp:BackendResponse)=>{
       if(resp.status){
         this.allDocs=resp.data;        
-        this.allDocs.sort((a, b) => (a.name > b.name ? 1 : -1));
+        //this.allDocs.sort((a, b) => (a.name > b.name ? 1 : -1));
+      }
+    });
+  }
+
+  async filterDocumentsByName(){
+    console.log(this.inputByName.value);
+    const tokenUser = await  this.storage.get('USER_INFO');
+    this.dat.getAllDocumentsByCondition({idUser: tokenUser.idUser,inactive:false, name:{ $regex :`.*${this.inputByName.value}.*`, $options: "i"} }).subscribe((resp:BackendResponse)=>{
+      if(resp.status){
+        this.allDocs=resp.data;        
+        //this.allDocs.sort((a, b) => (a.name > b.name ? 1 : -1));
       }
     });
   }
@@ -136,4 +180,12 @@ export class SignDocComponent implements OnInit {
     }
   }
   
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Your settings have been saved.',
+      duration: 2000
+    });
+    toast.present();
+  }
+
 }

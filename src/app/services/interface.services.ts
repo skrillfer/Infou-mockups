@@ -86,5 +86,7 @@ export interface BackendResponse{
 export interface Document{
     _id?:string;
     name:string;
-    state:string;
+    state:number;
+    messageInfile:string;
+    createdAt: Date;
 };

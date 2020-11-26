@@ -30,3 +30,6 @@ export const getMonthName = (date:Date) =>{
     return month[date.getMonth()];
 }
 
+export const castDateMongo = (date: Date) => {
+    return new Date(date).toISOString().split('T')[0];
+}

@@ -24,7 +24,7 @@
 
     </div>
     <!-- SignIn Form -->
-    <form class="ion-padding" [formGroup]="profileForm">
+    <form class="ion-padding form-sign-in" [formGroup]="profileForm">
       <!-- Email -->
       <ion-item>
         <ion-label>
@@ -38,7 +38,7 @@
         <ion-label>
           <ion-icon name="md-eye" color="color2"></ion-icon>
         </ion-label>
-        <ion-input type="password" placeholder="Password" name="password" formControlName="password"></ion-input>
+        <ion-input type="password" placeholder="Contraseña" name="password" formControlName="password"></ion-input>
       </ion-item>
 
       <!-- Forget Password Button -->
@@ -50,7 +50,7 @@
       -->
 
       <!-- SignIn Buttons -->
-      <div class="buttons">
+      <div class="buttons" style="margin-top: 20px;">
         <ion-button expand="block" color="color1" (click)="onSignInSubmit()" routerDirection="root">
           <ion-text><strong>ENTRAR</strong></ion-text>
         </ion-button>

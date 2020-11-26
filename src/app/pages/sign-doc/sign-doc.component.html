@@ -13,6 +13,7 @@
 
     <!-- Page title -->
     <ion-title>Firmar Documentos</ion-title>
+    
   </ion-toolbar>
 </ion-header>
 
@@ -26,12 +27,56 @@
       
 
       <div class="ion-margin-top">
-        <div class="col-md-2" style="float: right; font-size: x-large">
-          <ion-icon (click)="refresh()" slot="icon-only" name="refresh" class="custom-icon" style="background-color: #4CAF50"></ion-icon>
+        <div class="row justify-content-around">
+          <div class="col-auto">
+            <div class="row no-gutters">
+              <div class="col-auto">
+                <ion-item>
+                  <ion-input #input_search_by_name placeholder="Buscar por nombre" style="min-width: 100px;"></ion-input>
+                </ion-item>
+              </div>
+              <div class="col">
+                <ion-button style="font-size: x-small;" color="white" (click)="filterDocumentsByName()"><ion-icon name="search" slot="icon-only" style="color: #495057;"></ion-icon></ion-button>
+              </div>
+              
+            </div>
+            <div class="row no-gutters">
+              <div class="col-auto">
+                <ion-item [formGroup]="profileForm">
+                  <ion-label>Fecha</ion-label>
+                  <ion-datetime [pickerOptions]="customPickerOptions" formControlName="searchDate" placeholder="Buscar por fecha"></ion-datetime>
+                </ion-item>
+              </div>
+              
+            </div>
+            
+          </div>
+          
+          <div class="col-auto" style="float: center; font-size: x-large">
+
+            <ion-button color="secondary" (click)="refresh()">
+              <ion-icon 
+                 
+                slot="end" 
+                name="refresh"  >
+              </ion-icon>
+              <div style="font-size: smaller; font-weight: bolder;">
+                Recargar
+              </div>
+            </ion-button>
+          </div>
+          <div class="col-auto" style="float: center; font-size: x-large">
+            <ion-button color="success" (click)="goToAddNewDocument()">
+              <ion-icon  slot="end" name="add">
+              </ion-icon>
+              <div style="font-size: smaller; font-weight: bolder;">
+                Nuevo
+              </div>
+            </ion-button>
+          </div>
+          
         </div>
-        <div class="col-md-2" style="float: right; font-size: x-large">
-          <ion-icon (click)="goToAddNewDocument()" slot="icon-only" name="add" class="custom-icon"></ion-icon>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -55,14 +100,19 @@
           <ion-button *ngIf="doc.state===1" fill="transparent" (click)="downloadFile(doc._id,doc.name)" >
             <ion-icon slot="icon-only" name="download" class="custom-icon-engine" style="color: blue"></ion-icon>
           </ion-button>
-        </ion-item>
+        </ion-item>      
         <ion-card-content>
+          <div style="font-size: x-small;">
+            <b>{{castDateMongoRef(doc.createdAt)}}</b> 
+           </div>
           <b *ngIf="doc.state===1" style="color:#4CAF50">Firmado</b>
           <b *ngIf="doc.state===0" style="color:blue">Pendiente</b>
-          <b *ngIf="doc.state===-1" style="color:red">Error</b>
+          <b *ngIf="doc.state===-1" style="color:red">Problema de firmado</b>
            &nbsp;&nbsp;&nbsp;&nbsp; {{doc?.messageInfile}}
+           
         </ion-card-content>
-      </ion-card>
+        
+       </ion-card>
       <!--
       <div class="table-responsive">    
         <table class="table table-striped" style="overflow-x: scroll;">

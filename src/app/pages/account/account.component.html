@@ -38,6 +38,7 @@
       </ion-item>
       
       <ion-list lines="full" class="ion-margin">
+        <!--
         <ion-item >
           <ion-label class="recize-label" position="stacked">
             NIT
@@ -51,7 +52,7 @@
           </ion-label>
           <ion-input class="input-custom"  type="text" placeholder="" formControlName="address"></ion-input>
         </ion-item>
-
+        -->
         <ion-item style="padding-top: 12px;">
           <ion-label class="recize-label" position="stacked">
             Primer Nombre  
@@ -97,8 +98,7 @@
       </ion-list>
     </form>
   </div>
-  <div class="section_three ion-padding">
-    <form [formGroup]="profileForm" class="ion-padding">
+  <div class="section_three ion-padding-bottom">
       <!-- Personal Information -->
       
       
@@ -106,15 +106,14 @@
       
       
       <!-- SignUp Button -->
-      <div class="buttons ion-padding-top">
-        <ion-button (click)="false" [disabled]="!profileForm.valid" expand="block" color="color1"  routerDirection="root">
+      <div class="buttons buttons-container">
+        <ion-button (click)="onEditInformationAccount()" [disabled]="!profileForm.valid" expand="block" color="color1"  routerDirection="root">
           <ion-text><strong>Guardar</strong></ion-text>
         </ion-button>
 
-        <ion-button (click)="false"  expand="block" color="color1"  routerDirection="root">
+        <ion-button (click)="onCancelEditAccount()"  expand="block" color="danger"  routerDirection="root">
           <ion-text><strong>Cancelar</strong></ion-text>
         </ion-button>
       </div>
-    </form>
   </div>
 </ion-content>

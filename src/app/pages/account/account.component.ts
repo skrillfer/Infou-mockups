@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
+import { BackendResponse, UserLoggedIn } from 'src/app/services/interface.services';
 
 @Component({
   selector: 'app-account',
@@ -9,8 +12,6 @@ import { Storage } from '@ionic/storage';
 })
 export class AccountComponent implements OnInit {
   profileForm = new FormGroup({
-    nit: new FormControl('',[Validators.required]),
-    address: new FormControl('',[Validators.required]),
 
     firstName : new FormControl('',[Validators.required]),
     secondName : new FormControl(''),
@@ -19,15 +20,15 @@ export class AccountComponent implements OnInit {
     secondLastName : new FormControl(''),
     marriedLastName : new FormControl('')    
   });
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage, private router:Router, private dat: DataService) {
     this.storage.get('USER_INFO').then(us=>{
-      const{nit,address,firstName,secondName,
+      const{firstName,secondName,
         thirdName,lastName,secondLastName,
         marriedLastName}
         = us;
         //console.log(us);
       this.profileForm.patchValue({
-        nit,address,firstName,secondName,
+        firstName,secondName,
         thirdName,lastName,secondLastName,
         marriedLastName
       });
@@ -37,4 +38,22 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {}
 
+
+  onCancelEditAccount(){
+    this.router.navigateByUrl("tabs/tab1");
+  }
+
+  async onEditInformationAccount(){
+    if(this.profileForm.valid){
+        const userInfo = await  this.storage.get('USER_INFO') as UserLoggedIn;
+        this.dat.updateInformationUser({...this.profileForm.value, idUser:userInfo.idUser}).subscribe( async (response: BackendResponse)=>{
+          await this.storage.set('USER_INFO',{...userInfo,...this.profileForm.value});
+          this.dat.presentAlertConfirm([{text:'Entendido',handler: ()=> this.router.navigateByUrl("tabs/tab1")}],response.status?'Exito':'Error',response.message);
+        },(err)=>{
+          this.dat.presentAlertConfirm(['Entendido'],'Error',err.message);
+        });
+    }else{
+      this.dat.presentAlertConfirm(['Entendido'],'Error','Por favor, verifique los datos ingresados.');
+    }
+  }
 }

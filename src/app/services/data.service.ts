@@ -6,7 +6,7 @@ import { AlertController } from '@ionic/angular';
 
 import { forkJoin, Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
-import { SignInContainer,User, BillIn, Establishment, BillOut } from './interface.services';
+import { SignInContainer,User, BillIn, Establishment, BillOut, UserLoggedIn } from './interface.services';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,8 @@ export class DataService {
   private apiEstablishment:any = `${this.host}/establishment`
   // DOCUMENT
   public apiDocument:any = `${this.host}/signature`
+  // USER ACTIONS
+  private apiUserActions:any=`${this.host}/useractions`;
 
   // NIT CONSULT
   private apiEfactNit:any = `http://e-fact.com.gt/api/receipt/taxpayer`
@@ -58,28 +60,31 @@ export class DataService {
   userSignUp(user: User){
     return this.http.post(`${this.apiRegister}`,user).pipe(data=> data);
   }
+  // User Actions
+  updateInformationUser(body){
+  return this.http.post(`${this.apiUserActions}/updateuser/${body.idUser}`,body).pipe(data=> data);
+  }
+  //Documents
+  createDocument(body:Document){
+    return this.http.post(`${this.apiDocument}`,body).pipe(data => data);
+  }
 
-    //Documents
-    createDocument(body:Document){
-      return this.http.post(`${this.apiDocument}`,body).pipe(data => data);
-    }
+  updateSpecificDocument(id,body){
+    return this.http.put(`${this.apiDocument}/${id}`,body).pipe(data => data);
+  }
 
-    updateSpecificDocument(id,body){
-      return this.http.put(`${this.apiDocument}/${id}`,body).pipe(data => data);
-    }
-
-    deteleSpecificDocument(id){
-      return this.http.delete(`${this.apiDocument}/${id}`).pipe(data => data);
-    }
+  deteleSpecificDocument(id){
+    return this.http.delete(`${this.apiDocument}/${id}`).pipe(data => data);
+  }
     
-    getAllDocuments(body){
-      return this.http.post(`${this.apiDocument}/filter`,body).pipe(data => data);
-    }
+  getAllDocumentsByCondition(body){
+    return this.http.post(`${this.apiDocument}/filter`,body).pipe(data => data);
+  }
   
-    getOneDocument(id,responseType){
-      return this.http.get(`${this.apiDocument}/getFile/${id}`,responseType).pipe(data => data);
-    }
-  
+  getOneDocument(id,responseType){
+    return this.http.get(`${this.apiDocument}/getFile/${id}`,responseType).pipe(data => data);
+  }
+
   //Establishment
   createEstablishment(body:Establishment){
     return this.http.post(`${this.apiEstablishment}`,body).pipe(data => data);

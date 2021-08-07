@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Document, BackendResponse } from 'src/app/services/interface.services';
 import { ModalController, LoadingController, NavController } from '@ionic/angular';
@@ -34,6 +35,7 @@ export class SignDocComponent implements OnInit {
      public modalController: ModalController, 
      private loadingController: LoadingController, 
      private dat: DataService,
+     private router: Router,
      private storage: Storage,
      public toastController: ToastController) { 
     
@@ -62,6 +64,7 @@ export class SignDocComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   async goToAddNewDocument(){
@@ -123,7 +126,8 @@ export class SignDocComponent implements OnInit {
   }
 
   downloadFile(id,name){
-    
+    //this.router.navigateByUrl(`tabs/tab3/${id}`);
+    //return;
     try {
       this.dat.getOneDocument(id,{responseType:  'blob'})
       .subscribe(async (datablob:any) => {

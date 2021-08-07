@@ -14,7 +14,7 @@ import { SignInContainer,User, BillIn, Establishment, BillOut, UserLoggedIn } fr
 export class DataService {
   //private host:string = 'http://localhost:42100';
   //private host:string = 'https://infoutility-app-1.herokuapp.com';
-  private host:string = 'http://e-fact.com.gt/api/efacturas';
+  private host:string = "http://192.241.159.190:41300";//'http://e-fact.com.gt/api/efacturas';
   //private host:string = 'https://hopeful-stonebraker-9a589e.netlify.app/api/efacturas';
   
   // LOGIN
